@@ -1,0 +1,64 @@
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    font-size: 14px;
+}
+
+.footer > div {
+    margin: 0 20px
+}
+
+.footer > div > h4 {
+    margin-bottom: 5px;
+}
+
+
+.footer2 {
+    padding-top: 10px;
+    padding-bottom: 30px;
+    color: white;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+}
+
+.rightFooter{
+    position: relative;
+}
+.rightFooterItem {
+    position: relative;
+    margin-bottom: 5px;
+
+    right: 0;
+    border-bottom: 1px solid white;
+    padding-bottom: 20px;
+    width: 500px
+}
+
+.rightFooterItem > h4 {
+    margin-bottom: 5px;
+
+}
+
+.footerTitle {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.footerInput {
+    margin-top: 5px;
+}
+.footerBtn {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.underline {
+    text-decoration: underline;
+}

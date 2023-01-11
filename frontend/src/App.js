@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./routes/Home"
-import ViewCart from "./routes/ViewCart"
-import Search from "./routes/Search"
-import Login from "./routes/Login"
-import SignUp from "./routes/SignUp";
-import Profile from "./routes/Profile";
-import ItemDetails from "./routes/ItemDetails";
+import Home from "./pages/Home"
+import ViewCart from "./pages/ViewCart"
+import Search from "./pages/Search"
+import Login from "./pages/Login"
+import SignUp from "./pages/SignUp";
+import Profile from "./pages/Profile";
+import ItemDetails from "./pages/ItemDetails";
 
 function App() {
   return (

@@ -21,14 +21,16 @@ export default function Navbar() {
                 <FontAwesomeIcon icon={faMagnifyingGlass} inverse id='magnifying'/>
             </div>
         </div>
-        <div id="title">Shop Me</div>
-        <div className="nav">
-            <div className='navTxt'>Clothing</div>
-            <div className='navTxt'>Sweaters</div>
-            <div className='navTxt'>Tops</div>
-            <div className='navTxt'>Pants & Jeans</div>
-            <div className='navTxt'>Accessories</div>
-            <div className='navTxt'>Shoes</div>
+        <div className='container2'>
+            <div id="title">Shop Me</div>
+            <div className="nav">
+                <a href= " " >Clothing</a>
+                <a href= " " >Sweaters</a>
+                <a href= " " >Tops</a>
+                <a href= " " >Pants & Jeans</a>
+                <a href= " " >Accessories</a>
+                <a href= " " >Shoes</a>
+            </div>
         </div>
     </div>
   )
