@@ -1,11 +1,15 @@
+footer {
+    width: auto;
+}
 .footer {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-around;
     background-color: black;
     color: white;
     padding: 20px;
     font-size: 14px;
+    width: auto
 }
 
 .footer > div {
@@ -18,7 +22,8 @@
 
 
 .footer2 {
-    padding-top: 10px;
+    width: auto;
+    padding-top: 20px;
     padding-bottom: 30px;
     color: white;
     background-color: black;
@@ -29,7 +34,8 @@
 }
 
 .rightFooter{
-    position: relative;
+    width: auto;
+    
 }
 .rightFooterItem {
     position: relative;

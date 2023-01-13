@@ -2,52 +2,6 @@
     margin: 25px 0;
 }
 
-.slider-wrapper {
-    position: relative;
-    max-width: 80rem;
-    margin: 0 auto;
-}
-
-.slider{
-    display: flex;
-    aspect-ratio: 16 / 8;
-    overflow-x: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-}
-
-.slider > img {
-    flex: 1 0 100%;
-    scroll-snap-align: start;
-    object-fit: cover;
-}
-
-.slider-nav {
-    display: flex;
-    column-gap: 1rem;
-    position: absolute;
-    margin-top: 20px;
-    bottom: 1.25rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 0;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 5px;
-    border-radius: 10px;
-}
-
-.slider-nav a {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background-color: rgb(0, 0, 0);
-    opacity: 0.5;
-    transition: opacity ease 250ms;
-}
-.slider-nav a:hover{
-    opacity: 1;
-}
-
 .home {
     position: relative;
     display: flex;
@@ -121,4 +75,70 @@ p > a {
 .thirdRow > img {
     aspect-ratio: 5/4;
     width: 250px;
+}
+
+.slideshow {
+    position: relative;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.slideImgs {
+    aspect-ratio: 16 / 9;
+    width: 1200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.mySlides {
+    display: none;
+    width: 1200px;
+}
+
+.arrow {
+    padding: 15px;
+}
+
+.arrow:hover {
+    color: #f2f2f2;
+    background-color: rgba(0, 0, 0, 0.8)
+}
+
+
+
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    position: absolute;
+    bottom: 0;
+    max-width: 1200px;
+    min-width: 1200px;
+    width: 100%;
+    text-align: center;
+    background-color: #222428
+}
+
+.dot {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color .6s ease;
+}
+
+.dotContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.dot:hover {
+    background-color: #252525
 }

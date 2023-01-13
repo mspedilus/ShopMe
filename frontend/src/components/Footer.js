@@ -5,6 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram, faPinterest, faTiktok, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
 
 export default function Footer() {
+
+    //Dispalys thank you message after filling out newsletter sign up
+    function onNewsletterSignUp (e){
+        e.preventDefault()
+        document.getElementById("thankYouMsg").innerHTML = "Thank You!";
+        document.getElementById("newsletter").style.display = "none";
+    }
+    
   return (
 
  <footer>
@@ -36,12 +44,17 @@ export default function Footer() {
             <div className="rightFooterItem">
                 <h4>Be The First To Know With Our Emails</h4>
                 <p>If texts are more your style, we can send those too</p>
-                <input type="email" className='footerInput' />
-                <button className='footerBtn'>Sign Up</button>
+                <p className="footerTitle underline" id="thankYouMsg"></p>
+                <form id="newsletter" onSubmit={onNewsletterSignUp}>
+                    <input type="email" className='footerInput' required />
+                    <button className='footerBtn'>Sign Up</button>
+                </form>
+
+
             </div>
             <div className="rightFooterItem">
                 <h4 className="footerTitle">Open A ShopMe's Card & Get 20% Off</h4>
-                <p>Today and tomorrow,* up to a total savings of $100 on your ShopMe's purchases over the 2 days. *Subject to credit approval. <inline className="underline">Details.</inline> <br /> <inline className="underline">Apply now</inline></p>
+                <p>Today and tomorrow,* up to a total savings of $100 on your ShopMe's purchases over the 2 days. *Subject to credit approval. <span className="underline">Details.</span> <br /> <span className="underline">Apply now</span></p>
             </div>
             <div>
                 <h4 className="footerTitle">Connect With Us</h4>
