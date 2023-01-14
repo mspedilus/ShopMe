@@ -6,6 +6,7 @@ import Login from "./pages/Login"
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import ItemDetails from "./pages/ItemDetails";
+import "./styles/app.css"
 
 function App() {
   return (

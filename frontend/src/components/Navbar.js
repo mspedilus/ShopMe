@@ -1,15 +1,16 @@
-import { React, useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import "../styles/navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faUser, faCartShopping} from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 export default function Navbar() {
-    const [searchVal, setSearchVal] = useState("")
 
+    const [searchVal, setSearchVal] = useState("")
     const navigate = useNavigate()
 
     //Redirects page to search results page
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     function onSearch(){
         navigate("/search?name="+searchVal);
     }
@@ -22,6 +23,23 @@ export default function Navbar() {
         else if (action === "open_sale") document.querySelector('.sale-options').style.display = "flex"
         else if(action === "close_sale") document.querySelector('.sale-options').style.display = "none"
     }
+
+    
+    useEffect(() => {
+        const pressedEnterKey = () => {            
+            // Executes the onSearch function when the user presses the enter key
+            document.getElementById("searchInput").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    onSearch()
+                }
+            });
+        }
+        pressedEnterKey()
+
+
+        return () => window.removeEventListener("keypress", pressedEnterKey)
+    }, [onSearch])
+
 
 
   return (
@@ -37,14 +55,14 @@ export default function Navbar() {
             </div>
 
             <div className='search'>
-                <input className="input" type="text" onChange={(e) => setSearchVal(e.target.value)} />
+                <input value={searchVal} className="input" id="searchInput" type="text" onChange={(e) => setSearchVal(e.target.value)} />
                 <FontAwesomeIcon onClick={onSearch} icon={faMagnifyingGlass} inverse id='magnifying'/>
             </div>
         </div>
         <div className='container2'>
-            <div id="title">Shop Me</div>
+            <Link id="title" to="/">Shop Me</Link>
             <div className="nav">
-                <p onMouseEnter={() => onMouseEvents("open_men")}
+                <p className="men-nav" onMouseEnter={() => onMouseEvents("open_men")}
                    onMouseLeave={() => onMouseEvents("close_men")}>Men</p>
                 <p onMouseEnter={() => onMouseEvents("open_women")}
                    onMouseLeave={() => onMouseEvents("close_women")}>Women</p>

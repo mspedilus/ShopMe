@@ -2,6 +2,7 @@ import express from "express"
 import User from "../models/User.js";
 import bcrypt from "bcryptjs"
 import { createError } from "../index.js";
+import jwt from "jsonwebtoken";
 const router = express.Router();
 
 //Creates new user and stores user info in MongoDB
@@ -41,14 +42,36 @@ router.post("/login", async (req, res, next) => {
         console.log(isPasswordCorrect)
         if(!isPasswordCorrect) return next(createError(400, "Wrong password or username!"));
 
+        //Creates and sends json web token
+        const token = jwt.sign({id: user._id}, process.env.JWT)
         const {password, ...otherDetails} = user._doc
-        res.status(200).json(otherDetails)
+        res.cookie("access_token", token, { httpOnly: true }).status(200).json(otherDetails)
 
     } catch(err) {
         next(err)
     }
 
-
 })
+
+//Checks if token is valid
+export const verifyToken = (req, res, next) => {
+    const token = req.cookies.access_token
+    if(!token) return next(createError(401, "You are not authenticated"))
+    
+    jwt.verify(token, process.env.JWT, (err, user) => {
+        if(err) return next(createError(403, "Token is not valid"))
+        req.user = user
+        next()
+    })
+    
+}
+
+//Checks if user is authenticated
+export const verifyUser = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if(req.user.id === req.params.id) next()
+        else return next(createError(403, "You are not authorized"))
+    })
+}
 
 export default router

@@ -1,16 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Alex+Brush');
 
-body{
-    margin : 0px !important;
-
- }
-
  .header {
     position: sticky;
     top: 0;
     z-index: 1;
     min-width: 50%;
+    width: 100%;
  }
+
 .container {
     display: flex;
     flex-direction: row;
@@ -21,6 +18,7 @@ body{
     align-items: center;
     min-height: 40px;
 }
+
 .container2 {
     background-color: white;
 }
@@ -35,10 +33,13 @@ body{
 }
 
 #title{
+    display: block;
     font-size: 80px;
-    text-align: center;
+    text-align: center;    
     font-weight: 900;
     font-family: 'Alex Brush';
+    text-decoration: none;
+    color: black;
 
 }
 
@@ -76,19 +77,27 @@ body{
     padding: 10px;
     display: none;
     justify-content:space-evenly;
-    background-color: rgb(255, 213, 213);
+    background-color: rgb(253, 221, 221);
     height: 200px;
     height: auto;
+    position: absolute;
+    width: 100%;
+    
 }
 
 .sale-options {
     padding: 10px;
     display: none;
     justify-content: center;
-    background-color: rgb(255, 213, 213);
+    background-color: rgb(253, 221, 221);
     height: 200px;
     height: auto;
+    position: absolute;
+    width: 100%;
+
 }
+
+
 .sale-items {
     position: relative;
     left: 100px;
@@ -99,3 +108,4 @@ body{
     color: rgb(253, 92, 119);
     text-decoration: underline;
 }
+

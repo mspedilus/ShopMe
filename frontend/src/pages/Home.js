@@ -149,7 +149,7 @@ export default function Home() {
         <img src={Abercrombie} alt="Levi's logo" />
         <img src={CalvinKlein} alt="Calvin Klein logo" />
       </div>
-      <h2>Featured Fashionettes</h2>
+      <h2>Recommended For You</h2>
 
       </section>
       

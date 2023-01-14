@@ -73,8 +73,9 @@ p > a {
 }
 
 .thirdRow > img {
-    aspect-ratio: 5/4;
+    aspect-ratio: 1;
     width: 250px;
+    cursor: pointer;
 }
 
 .slideshow {

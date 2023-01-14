@@ -1,5 +1,6 @@
 footer {
-    width: auto;
+    position: relative;
+    width: 100%;
 }
 .footer {
     display: flex;

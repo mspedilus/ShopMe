@@ -1,0 +1,92 @@
+.search-container{
+    height: auto;
+}
+/* Dropdown Button */
+.sort-dropBtn {
+    width: 150px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid black
+  }
+  
+  
+  /* The container <div> - needed to position the dropdown content */
+  .sort-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .sort-dropContent {
+    display: none;
+    position: absolute;
+    background-color: #fffcfc;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(48, 47, 47, 0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .sort-dropContent a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .sort-dropContent a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {
+    display:block;
+}
+
+.search-top{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0;
+}
+
+.unclickable {
+    pointer-events: none
+}
+
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 315px 315px 315px;
+    grid-template-rows: auto;
+    gap: 30px
+    
+}
+
+.sidebar {
+    position: sticky;
+    top: 156px;
+    min-width: 450px;
+    background-color: lightskyblue;
+    margin-right: 30px;
+}
+
+.grid-item {
+    display: grid;
+
+    text-align: left;
+}
+
+.grid-item > img {
+    margin: 0 0 10px 0;
+}
+
+
+.results-container {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+
+}
+
+
