@@ -32,10 +32,13 @@
     align-items: flex-end;
 }
 
+.titleContainer{
+    text-align: center;
+}
+
 #title{
-    display: block;
+    margin: 0 auto;
     font-size: 80px;
-    text-align: center;    
     font-weight: 900;
     font-family: 'Alex Brush';
     text-decoration: none;

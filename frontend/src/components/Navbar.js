@@ -10,10 +10,9 @@ export default function Navbar() {
     const navigate = useNavigate()
 
     //Redirects page to search results page
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    function onSearch(){
-        navigate("/search?name="+searchVal);
-    }
+    const onSearch = useCallback(() => {
+        navigate("/search?name="+searchVal, {state: {searchVal}});
+    }, [navigate, searchVal])
 
     function onMouseEvents (action) {
         if(action === "open_men") document.querySelector('.men-options').style.display = "flex"
@@ -60,7 +59,9 @@ export default function Navbar() {
             </div>
         </div>
         <div className='container2'>
-            <Link id="title" to="/">Shop Me</Link>
+            <div className='titleContainer'>
+                <Link id="title" to="/">Shop Me</Link>
+            </div>
             <div className="nav">
                 <p className="men-nav" onMouseEnter={() => onMouseEvents("open_men")}
                    onMouseLeave={() => onMouseEvents("close_men")}>Men</p>

@@ -2162,7 +2162,7 @@ export const data = [
   ]
 
 
-  const fullData = {
+  export const fullData = {
     "searchTerm": "",
     "categoryName": "Shoes, Boots & Sneakers",
     "itemCount": 2434,
