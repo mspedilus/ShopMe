@@ -20,10 +20,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useNavigate } from 'react-router-dom'
 
 //Homepage
 export default function Home() {
-
+  var navigate = useNavigate()
   var slideIndex = 1;
 
   //Starts automatic slideshow
@@ -63,6 +64,10 @@ export default function Home() {
     slides[slideIndex-1].style.display = "block";
     dots[slideIndex-1].style.backgroundColor = "#252525";
 
+  }
+
+  function handleClick (categoryId) {
+    navigate("/search?name=", {state: {searchVal: "", category: categoryId}});
   }
 
 
@@ -105,59 +110,49 @@ export default function Home() {
       <span className="dot" onClick={() => currentSlide(4)}></span>
     </div>
 
-
-
-
-
       <section className="categories">
         <div className='firstRow'>
           <div className='topCat'>
             <img src={Denim} className="top" alt="A man wearing a denim shirt and pants" />
-            <h3>Denim With Love 17102</h3> 
-            <p> Meet our new ultra-flattering <br /> Slim Flare Jeans <br /> <a href=" " >Shop Now</a></p>
+            <h3>Denim With Love</h3> 
+            <p> Meet our new ultra-flattering <br /> Slim Flare Jeans <br /> <span onClick={() => handleClick(17102)} >Shop Now</span></p>
           </div>
           <div className='topCat'>
-            <img src={NewArrival} className="top" alt="Women wearing a denim shirt and pants" />
+            <img src={NewArrival} className="top" alt="Women posing on a stair step" />
             <h3>New Arrivals</h3>
-            <p>Consider this your <br /> New Year reset <br /> <a href=" " >Shop Now</a></p>
+            <p>Consider this your <br /> New Year reset <br /> <span onClick={() => handleClick(27413)} >Shop Now</span></p>
           </div>
         </div>
 
         <div className='secondRow'>
           <div className='botCat'>
-            <img src={ActiveWear}  className="bot"alt="Women wearing a denim shirt and pants" />
+            <img src={ActiveWear}  className="bot"alt="Women posing in activewear" />
             <h3>Activewear</h3>
-            <p>Affordable, high quality  <br /> And stylish workout clothes <br /> <a href=" " >Shop Now</a></p>
+            <p>Affordable, high quality  <br /> And stylish workout clothes <br /> <span onClick={() => handleClick(26091)} >Shop Now</span></p>
           </div>
           <div className='botCat'  id="bags">
             <img src={Bags} className="bot" id="bagsPhoto" alt="Assortment of bags" />
             <h3>Bags & Travel</h3>
-            <p> Shop hundreds of styles <br /> Purses, backpacks, and luggages <br /> <a href=" " >Shop Now</a></p>
+            <p> Shop hundreds of styles <br /> Purses, backpacks, and luggages <br /> <span onClick={() => handleClick(9265)} >Shop Now</span></p>
           </div>
           <div className='botCat'>
             <img src={PlusSize} className="bot" alt="A women wearing a denim shirt and pants" />
             <h3>Diverse Selection</h3>
-            <p>The styles you love <br /> in the sizes you need <br /> <a href=" " >Shop Now</a></p>
+            <p>The styles you love <br /> in the sizes you need <br /> <span onClick={() => handleClick(9577)} >Shop Now</span></p>
           </div>
       </div>
       <h2>Shop By Brands</h2>
 
       <div className='thirdRow'>
-        <img src={Adidas} alt="Adidas logo" />
-        <img src={TommyHilfiger} alt="Tommy Hilfiger logo" />
-        <img src={NorthFace} alt="North Face logo" />
-        <img src={Abercrombie} alt="Levi's logo" />
-        <img src={CalvinKlein} alt="Calvin Klein logo" />
+        <img onClick={() => handleClick(5906)} src={Adidas} alt="Adidas logo" />
+        <img onClick={() => handleClick(5247)} src={TommyHilfiger} alt="Tommy Hilfiger logo" />
+        <img onClick={() => handleClick(19899)} src={NorthFace} alt="North Face logo" />
+        <img onClick={() => handleClick(4564)} src={Abercrombie} alt="Abercrombie logo" />
+        <img onClick={() => handleClick(2038)} src={CalvinKlein} alt="Calvin Klein logo" />
       </div>
       <h2>Recommended For You</h2>
-
       </section>
-      
 
-
-
-
-    
     <Footer />
     </div>
   )

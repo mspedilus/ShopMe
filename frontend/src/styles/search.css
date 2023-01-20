@@ -1,6 +1,9 @@
 .search-container{
-    height: auto;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+
 /* Dropdown Button */
 .sort-dropBtn {
     width: 200px;
@@ -79,7 +82,7 @@
 
 .grid-item {
     display: grid;
-    font-size: 14px;
+    font-size: 15px;
     text-align: left;
 }
 
@@ -93,8 +96,8 @@
     position: relative;
     margin-bottom: 30px;
     display: flex;
+    flex-grow: 1;
     justify-content: center;
-
 }
 
 .filterBtn {
@@ -137,3 +140,20 @@ input[type=number] {
     background-color: rgb(233, 231, 231);
 }
 
+.crossedText {
+    text-decoration: line-through;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.crossedText + p {
+    color: red;
+    font-weight: bold;
+}
+
+.loading{
+    height: 100vh;
+    margin: 50px auto;
+}

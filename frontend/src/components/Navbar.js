@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState } from 'react'
 import "../styles/navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faUser, faCartShopping} from '@fortawesome/free-solid-svg-icons'
@@ -10,36 +10,11 @@ export default function Navbar() {
     const navigate = useNavigate()
 
     //Redirects page to search results page
-    const onSearch = useCallback(() => {
-        navigate("/search?name="+searchVal, {state: {searchVal}});
-    }, [navigate, searchVal])
-
-    function onMouseEvents (action) {
-        if(action === "open_men") document.querySelector('.men-options').style.display = "flex"
-        else if(action === "close_men") document.querySelector('.men-options').style.display = "none"
-        else if (action === "open_women") document.querySelector('.women-options').style.display = "flex"
-        else if(action === "close_women") document.querySelector('.women-options').style.display = "none"
-        else if (action === "open_sale") document.querySelector('.sale-options').style.display = "flex"
-        else if(action === "close_sale") document.querySelector('.sale-options').style.display = "none"
-    }
-
-    
-    useEffect(() => {
-        const pressedEnterKey = () => {            
-            // Executes the onSearch function when the user presses the enter key
-            document.getElementById("searchInput").addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    onSearch()
-                }
-            });
+    function onSearch(event, categoryId) {
+        if (event.key === "Enter" || event.type === "click") {
+            navigate("/search?name="+searchVal, {state: {searchVal, category: categoryId}});
         }
-        pressedEnterKey()
-
-
-        return () => window.removeEventListener("keypress", pressedEnterKey)
-    }, [onSearch])
-
-
+    }
 
   return (
     <div className="header">
@@ -54,7 +29,7 @@ export default function Navbar() {
             </div>
 
             <div className='search'>
-                <input value={searchVal} className="input" id="searchInput" type="text" onChange={(e) => setSearchVal(e.target.value)} />
+                <input onKeyDown={onSearch} value={searchVal} className="input" id="searchInput" type="text" onChange={(e) => setSearchVal(e.target.value)} />
                 <FontAwesomeIcon onClick={onSearch} icon={faMagnifyingGlass} inverse id='magnifying'/>
             </div>
         </div>
@@ -62,205 +37,233 @@ export default function Navbar() {
             <div className='titleContainer'>
                 <Link id="title" to="/">Shop Me</Link>
             </div>
+
             <div className="nav">
-                <p className="men-nav" onMouseEnter={() => onMouseEvents("open_men")}
-                   onMouseLeave={() => onMouseEvents("close_men")}>Men</p>
-                <p onMouseEnter={() => onMouseEvents("open_women")}
-                   onMouseLeave={() => onMouseEvents("close_women")}>Women</p>
-                <p onMouseEnter={() => onMouseEvents("open_sale")}
-                   onMouseLeave={() => onMouseEvents("close_sale")}>Sale</p>
+                {/* Men Options */}
+                <div className="men-dropdown">
+                    <p className='navTitles'>Men</p>
+                    <div className='men-dropContent' >
+                        <div>
+                            <h4>Men's Clothing</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 6993)}>New-in-clothing</p>
+                                <p onClick={(event) => onSearch(event, 25997)}>Plus Size</p>
+                                <p onClick={(event) => onSearch(event, 5678)}>Suits </p>
+                                <p onClick={(event) => onSearch(event, 3602)}>Shirts </p>
+                                <p onClick={(event) => onSearch(event, 5668)}>Hoodies & Sweatshirt </p>
+                                <p onClick={(event) => onSearch(event, 7617)}>Sweaters & Cardigans </p>
+                                <p onClick={(event) => onSearch(event, 3606)}>Jackets & Coats </p>
+                                <p onClick={(event) => onSearch(event, 4910)}>Pants </p>
+                                <p onClick={(event) => onSearch(event, 7078)}>Shorts </p>
+                                <p onClick={(event) => onSearch(event, 4208)}>Jeans </p>
+                                <p onClick={(event) => onSearch(event, 16329)}>Underwear & Socks </p>
+                                <p onClick={(event) => onSearch(event, 26090)}>Activewear </p>
+                                <p onClick={(event) => onSearch(event, 18797)}>Loungewear </p>
+                                <p onClick={(event) => onSearch(event, 13210)}>Swimwear </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4>Men's Shoes</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 17184)}>New-in-shoes </p>
+                                <p onClick={(event) => onSearch(event, 4209)}>Shoes, Boots, & Sneakers </p>
+                                <p onClick={(event) => onSearch(event, 11247)}>Loafers </p>
+                                <p onClick={(event) => onSearch(event, 5775)}>Sneakers </p>
+                                <p onClick={(event) => onSearch(event, 17514)}>Sliders & Flip Flops </p>
+                                <p onClick={(event) => onSearch(event, 5774)}>Boots </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4>Bags & Accessories</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 4210)}>All Accessories </p>
+                                <p onClick={(event) => onSearch(event, 9265)}>All Bags </p>
+                                <p onClick={(event) => onSearch(event, 27112)}>New-in-accessories </p>
+                                <p onClick={(event) => onSearch(event, 5034)}>Jewelry </p>
+                                <p onClick={(event) => onSearch(event, 6519)}>Sunglasses </p>
+                                <p onClick={(event) => onSearch(event, 19855)}>Watches </p>
+                            </div>
+                        </div>
+
+                        <div>
+                        <h4>Face & Body</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 27140)}>New-in-face-body </p>
+                                <p onClick={(event) => onSearch(event, 19517)}>Face & Body </p>
+                                <p onClick={(event) => onSearch(event, 27143)}>Haircare </p>
+                                <p onClick={(event) => onSearch(event, 27149)}>Makeup </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4>Brands</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 27111)}>Designer Brands </p>
+                                <p onClick={(event) => onSearch(event, 29065)}>Topman </p>
+                                <p onClick={(event) => onSearch(event, 7113)}>Adidas </p>
+                                <p onClick={(event) => onSearch(event, 2084)}>Converse </p>
+                                <p onClick={(event) => onSearch(event, 4747)}>Dr Martens </p>
+                                <p onClick={(event) => onSearch(event, 7277)}>Timberland </p>
+                                <p onClick={(event) => onSearch(event, 5247)}>Tommy Hilfiger </p>
+                                <p onClick={(event) => onSearch(event, 4766)}>Nike </p>
+                                <p onClick={(event) => onSearch(event, 5715)}>The North Face </p>
+                                <p onClick={(event) => onSearch(event, 3735)}>Casio </p>
+                                <p onClick={(event) => onSearch(event, 4280)}>Polo Ralph Lauren </p>
+                                <p onClick={(event) => onSearch(event, 4497)}>Rayban </p>
+                                <p onClick={(event) => onSearch(event, 19971)}>Abercrombie and Fitch </p>
+                                <p onClick={(event) => onSearch(event, 11248)}>Reclaimed Vintage </p>
+                                <p onClick={(event) => onSearch(event, 4564)}>Levis </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className='pointer'>
+                                <h4>Gifts</h4>
+                                <p onClick={(event) => onSearch(event, 16091)}>Gifts </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Women Options */}
+                <div className='women-dropdown'>
+                    <p className='navTitles'>Women</p>
+                    <div className='women-dropContent'>
+                        <div>
+                            <h4>Women's Clothing</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 6993)}>New-in-clothing </p>
+                                <p onClick={(event) => onSearch(event, 25997)}>Plus Size </p>
+                                <p onClick={(event) => onSearch(event, 5678)}>Suits </p>
+                                <p onClick={(event) => onSearch(event, 3602)}>Shirts </p>
+                                <p onClick={(event) => onSearch(event, 5668)}>Hoodies & Sweatshirt </p>
+                                <p onClick={(event) => onSearch(event, 7617)}>Sweaters & Cardigans </p>
+                                <p onClick={(event) => onSearch(event, 3606)}>Jackets & Coats </p>
+                                <p onClick={(event) => onSearch(event, 4910)}>Pants </p>
+                                <p onClick={(event) => onSearch(event, 7078)}>Shorts </p>
+                                <p onClick={(event) => onSearch(event, 4208)}>Jeans </p>
+                                <p onClick={(event) => onSearch(event, 16329)}>Underwear & Socks </p>
+                                <p onClick={(event) => onSearch(event, 26090)}>Activewear </p>
+                                <p onClick={(event) => onSearch(event, 18797)}>Loungewear </p>
+                                <p onClick={(event) => onSearch(event, 2238)}>Swimwear </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4>Women's Shoes</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 17184)}>New-in-shoes </p>
+                                <p onClick={(event) => onSearch(event, 4209)}>Shoes, Boots, & Sneakers </p>
+                                <p onClick={(event) => onSearch(event, 11247)}>Loafers </p>
+                                <p onClick={(event) => onSearch(event, 5775)}>Sneakers </p>
+                                <p onClick={(event) => onSearch(event, 17514)}>Sliders & Flip Flops </p>
+                                <p onClick={(event) => onSearch(event, 5774)}>Boots </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4>Bags & Accessories</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 4210)}>All Accessories </p>
+                                <p onClick={(event) => onSearch(event, 9265)}>All Bags </p>
+                                <p onClick={(event) => onSearch(event, 27109)}>New-in-accessories </p>
+                                <p onClick={(event) => onSearch(event, 5034)}>Jewelry </p>
+                                <p onClick={(event) => onSearch(event, 6519)}>Sunglasses </p>
+                                <p onClick={(event) => onSearch(event, 19855)}>Watches </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4>Face & Body</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 27140)}>New-in-face-body </p>
+                                <p onClick={(event) => onSearch(event, 19517)}>Face & Body </p>
+                                <p onClick={(event) => onSearch(event, 27143)}>Haircare </p>
+                                <p onClick={(event) => onSearch(event, 27149)}>Makeup </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4>Brands</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 27111)}>Designer Brands </p>
+                                <p onClick={(event) => onSearch(event, 29065)}>Topman </p>
+                                <p onClick={(event) => onSearch(event, 7113)}>Adidas </p>
+                                <p onClick={(event) => onSearch(event, 2084)}>Converse </p>
+                                <p onClick={(event) => onSearch(event, 4747)}>Dr Martens </p>
+                                <p onClick={(event) => onSearch(event, 7277)}>Timberland </p>
+                                <p onClick={(event) => onSearch(event, 5247)}>Tommy Hilfiger </p>
+                                <p onClick={(event) => onSearch(event, 4766)}>Nike </p>
+                                <p onClick={(event) => onSearch(event, 5715)}>The North Face </p>
+                                <p onClick={(event) => onSearch(event, 3735)}>Casio </p>
+                                <p onClick={(event) => onSearch(event, 4280)}>Polo Ralph Lauren </p>
+                                <p onClick={(event) => onSearch(event, 4497)}>Rayban </p>
+                                <p onClick={(event) => onSearch(event, 19971)}>Abercrombie and Fitch </p>
+                                <p onClick={(event) => onSearch(event, 11248)}>Reclaimed Vintage </p>
+                                <p onClick={(event) => onSearch(event, 4564)}>Levis </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4>Gifts</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 16091)}>Gifts </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Sale Options */}
+                <div className='sale-dropdown'>
+                    <p className='navTitles'>Sale</p>
+                    <div className='sale-dropContent' >
+                        <div className='sale-items'>
+                            <h4>Men's Sale</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 8409)}>Men Sale </p>
+                                <p onClick={(event) => onSearch(event, 6993)}>New-in-clothing </p>
+                                <p onClick={(event) => onSearch(event, 25997)}>Plus Size </p>
+                                <p onClick={(event) => onSearch(event, 5678)}>Suits </p>
+                                <p onClick={(event) => onSearch(event, 3602)}>Shirts </p>
+                                <p onClick={(event) => onSearch(event, 5668)}>Hoodies & Sweatshirt </p>
+                                <p onClick={(event) => onSearch(event, 7617)}>Sweaters & Cardigans </p>
+                                <p onClick={(event) => onSearch(event, 3606)}>Jackets & Coats </p>
+                                <p onClick={(event) => onSearch(event, 4910)}>Pants </p>
+                                <p onClick={(event) => onSearch(event, 7078)}>Shorts </p>
+                                <p onClick={(event) => onSearch(event, 4208)}>Jeans </p>
+                                <p onClick={(event) => onSearch(event, 16329)}>Underwear & Socks </p>
+                                <p onClick={(event) => onSearch(event, 26090)}>Activewear </p>
+                                <p onClick={(event) => onSearch(event, 18797)}>Loungewear </p>
+                                <p onClick={(event) => onSearch(event, 13210)}>Swimwear </p>
+                            </div>
+                        </div>
+
+                        <div className='sale-items'>
+                            <h4>Women's Sale</h4>
+                            <div className='pointer'>
+                                <p onClick={(event) => onSearch(event, 6993)}>New-in-clothing </p>
+                                <p onClick={(event) => onSearch(event, 25997)}>Plus Size </p>
+                                <p onClick={(event) => onSearch(event, 5678)}>Suits </p>
+                                <p onClick={(event) => onSearch(event, 3602)}>Shirts </p>
+                                <p onClick={(event) => onSearch(event, 20580)}>Hoodies & Sweatshirt </p>
+                                <p onClick={(event) => onSearch(event, 7617)}>Sweaters & Cardigans </p>
+                                <p onClick={(event) => onSearch(event, 3606)}>Jackets & Coats </p>
+                                <p onClick={(event) => onSearch(event, 4910)}>Pants </p>
+                                <p onClick={(event) => onSearch(event, 7078)}>Shorts </p>
+                                <p onClick={(event) => onSearch(event, 4208)}>Jeans </p>
+                                <p onClick={(event) => onSearch(event, 16329)}>Underwear & Socks </p>
+                                <p onClick={(event) => onSearch(event, 26090)}>Activewear </p>
+                                <p onClick={(event) => onSearch(event, 18797)}>Loungewear </p>
+                                <p onClick={(event) => onSearch(event, 13210)}>Swimwear </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
- 
-        <div className='men-options'  onMouseEnter={() => onMouseEvents("open_men")}
-                                      onMouseLeave={() => onMouseEvents("close_men")} >
-            <div>
-                <h4>Men's Clothing</h4>
-                <p>New-in-clothing 6993</p>
-                <p>Plus Size 25997</p>
-                <p>Suits 5678</p>
-                <p>Shirts 3602</p>
-                <p>Hoodies & Sweatshirt 5668</p>
-                <p>Sweaters & Cardigans 7617</p>
-                <p>Jackets & Coats 3606</p>
-                <p>Pants 4910</p>
-                <p>Shorts 7078</p>
-                <p>Jeans 4208</p>
-                <p>Underwear & Socks 16329</p>
-                <p>Activewear 26090</p>
-                <p>Loungewear 18797</p>
-                <p>Swimwear 13210</p>
-            </div>
-
-            <div>
-                <h4>Men's Shoes</h4>
-                <p>New-in-shoes 17184</p>
-                <p>Shoes, Boots, & Sneakers 4209</p>
-                <p>Loafers 11247</p>
-                <p>Sneakers 5775</p>
-                <p>Sliders & Flip Flops 17514</p>
-                <p>Boots 5774</p>
-            </div>
-
-            <div>
-                <h4>Bags & Accessories</h4>
-                <p>New-in-accessories 27112</p>
-                <p>All Accessories 4210</p>
-                <p>All Bags 9265</p>
-                <p>Jewelry 5034</p>
-                <p>Sunglasses 6519</p>
-                <p>Watches 19855</p>
-            </div>
-
-            <div>
-                <h4>Face & Body</h4>
-                <p>New-in-face-body 27140</p>
-                <p>Face & Body 19517</p>
-                <p>Haircare 27143</p>
-                <p>Makeup 27149</p>
-            </div>
-
-            <div>
-                <h4>Brands</h4>
-                <p>Designer Brands 27111</p>
-                <p>Topman 29065</p>
-                <p>Adidas 7113</p>
-                <p>Converse 2084</p>
-                <p>Dr Martens 4747</p>
-                <p>Timberland 7277</p>
-                <p>Tommy Hilfiger 5247</p>
-                <p>Nike 4766</p>
-                <p>The North Face 5715</p>
-                <p>Casio 3735</p>
-                <p>Polo Ralph Lauren 4280</p>
-                <p>Rayban 4497</p>
-                <p>Abercrombie and Fitch 19971</p>
-                <p>Reclaimed Vintage 11248</p>
-                <p>Levis 4564</p>
-            </div>
-
-            <div>
-                <h4>Gifts</h4>
-                <p>gifts 16091</p>
-            </div>
-        </div>
-
-
-        <div className='women-options'  onMouseEnter={() => onMouseEvents("open_women")}
-                                      onMouseLeave={() => onMouseEvents("close_women")} >
-            <div>
-                <h4>Women's Clothing</h4>
-                <p>New-in-clothing 6993</p>
-                <p>Plus Size 25997</p>
-                <p>Suits 5678</p>
-                <p>Shirts 3602</p>
-                <p>Hoodies & Sweatshirt 5668</p>
-                <p>Sweaters & Cardigans 7617</p>
-                <p>Jackets & Coats 3606</p>
-                <p>Pants 4910</p>
-                <p>Shorts 7078</p>
-                <p>Jeans 4208</p>
-                <p>Underwear & Socks 16329</p>
-                <p>Activewear 26090</p>
-                <p>Loungewear 18797</p>
-                <p>Swimwear 13210</p>
-            </div>
-
-            <div>
-                <h4>Women's Shoes</h4>
-                <p>New-in-shoes 17184</p>
-                <p>Shoes, Boots, & Sneakers 4209</p>
-                <p>Loafers 11247</p>
-                <p>Sneakers 5775</p>
-                <p>Sliders & Flip Flops 17514</p>
-                <p>Boots 5774</p>
-            </div>
-
-            <div>
-                <h4>Bags & Accessories</h4>
-                <p>New-in-accessories 27112</p>
-                <p>All Accessories 4210</p>
-                <p>All Bags 9265</p>
-                <p>Jewelry 5034</p>
-                <p>Sunglasses 6519</p>
-                <p>Watches 19855</p>
-            </div>
-
-            <div>
-                <h4>Face & Body</h4>
-                <p>New-in-face-body 27140</p>
-                <p>Face & Body 19517</p>
-                <p>Haircare 27143</p>
-                <p>Makeup 27149</p>
-            </div>
-
-            <div>
-                <h4>Brands</h4>
-                <p>Designer Brands 27111</p>
-                <p>Topman 29065</p>
-                <p>Adidas 7113</p>
-                <p>Converse 2084</p>
-                <p>Dr Martens 4747</p>
-                <p>Timberland 7277</p>
-                <p>Tommy Hilfiger 5247</p>
-                <p>Nike 4766</p>
-                <p>The North Face 5715</p>
-                <p>Casio 3735</p>
-                <p>Polo Ralph Lauren 4280</p>
-                <p>Rayban 4497</p>
-                <p>Abercrombie and Fitch 19971</p>
-                <p>Reclaimed Vintage 11248</p>
-                <p>Levis 4564</p>
-            </div>
-
-            <div>
-                <h4>Gifts</h4>
-                <p>gifts 16091</p>
-            </div>
-        </div>
-
-        <div className='sale-options'  onMouseEnter={() => onMouseEvents("open_sale")}
-                                      onMouseLeave={() => onMouseEvents("close_sale")} >
-            <div className=''>
-                <h4>Men's Sale</h4>
-                <p>Men Sale 8409</p>
-                <p>New-in-clothing 6993</p>
-                <p>Plus Size 25997</p>
-                <p>Suits 5678</p>
-                <p>Shirts 3602</p>
-                <p>Hoodies & Sweatshirt 5668</p>
-                <p>Sweaters & Cardigans 7617</p>
-                <p>Jackets & Coats 3606</p>
-                <p>Pants 4910</p>
-                <p>Shorts 7078</p>
-                <p>Jeans 4208</p>
-                <p>Underwear & Socks 16329</p>
-                <p>Activewear 26090</p>
-                <p>Loungewear 18797</p>
-                <p>Swimwear 13210</p>
-            </div>
-
-            <div className='sale-items'>
-                <h4>Women's Sale</h4>
-                <p>New-in-clothing 6993</p>
-                <p>Plus Size 25997</p>
-                <p>Suits 5678</p>
-                <p>Shirts 3602</p>
-                <p>Hoodies & Sweatshirt 5668</p>
-                <p>Sweaters & Cardigans 7617</p>
-                <p>Jackets & Coats 3606</p>
-                <p>Pants 4910</p>
-                <p>Shorts 7078</p>
-                <p>Jeans 4208</p>
-                <p>Underwear & Socks 16329</p>
-                <p>Activewear 26090</p>
-                <p>Loungewear 18797</p>
-                <p>Swimwear 13210</p>
-            </div>
-      
-        </div>
-
 
     </div>
   )
