@@ -1,7 +1,8 @@
 .search-container{
     display: flex;
     min-height: 100vh;
-    flex-direction: column;
+    flex-direction: row;
+    margin-bottom: 30px;
 }
 
 /* Dropdown Button */
@@ -25,6 +26,7 @@
   .sort-dropContent {
     display: none;
     position: absolute;
+    width: 200px;
     background-color: #fffcfc;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(48, 47, 47, 0.2);
@@ -74,10 +76,10 @@
 }
 
 .sidebar {
-    position: sticky;
-    top: 156px;
+    position: relative;
     min-width: 400px;
     margin-right: 30px;
+    margin-left: 200px;
 }
 
 .grid-item {
@@ -89,12 +91,11 @@
 .grid-item > img {
     margin-bottom: 10px;
     width: 300px;
+    cursor: pointer;
 }
-
 
 .results-container {
     position: relative;
-    margin-bottom: 30px;
     display: flex;
     flex-grow: 1;
     justify-content: center;
@@ -136,7 +137,12 @@ input[type=number] {
     cursor: pointer;
 }
 
-.updateBtn:active {
+
+.updateBtn:active{
+    box-shadow: 0px 0px 5px 3px rgba(141, 140, 140, 0.4);
+}
+
+.updateBtn:hover{
     background-color: rgb(233, 231, 231);
 }
 
@@ -155,5 +161,8 @@ input[type=number] {
 
 .loading{
     height: 100vh;
-    margin: 50px auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 330px;
 }
+

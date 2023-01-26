@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 
 import axios from "axios"
 
+//Retrieves data from api
 const useFetch = (url, properties) => {
     const [fetchedData, setFetchedData] = useState({facets: []})
     const [loading, setLoading] = useState(false)
@@ -27,15 +28,7 @@ const useFetch = (url, properties) => {
         }
         fetchData()
 
-
-     
-
     }, [url, properties, getState])
-
-
-
-
-
 
 
     return {fetchedData, loading, error}

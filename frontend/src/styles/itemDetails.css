@@ -1,0 +1,207 @@
+#test{
+    pointer-events: none;
+    color: black;
+    font-weight: none;
+}
+
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 650px 450px;
+    margin-top: 50px;
+    justify-content: center;
+
+}
+
+.detail-grid img {
+    max-width:100%;
+    max-height:100%;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.product-details > h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.markedDown {
+    color: red;
+    margin-left: 5px;
+    text-decoration: line-through;
+    cursor:default;
+}
+
+.sizeContainer {
+    display: flex;
+}
+
+.sizeContainer > p {
+
+    border: 1px solid black;
+    min-width: 30px;
+    min-height: 30px;
+    align-content: center;
+    padding: 5px;
+    border-radius: 100%;
+    text-align: center;
+    margin: 0 5px;
+}
+
+
+
+
+/* Dropdown Button */
+.size-dropBtn {
+    position: relative;
+    width: 250px;
+    padding: 8px 18px;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid black;
+    text-align: left;
+    font-size: 16px;
+    
+
+  }
+
+  .product-dropBtn {
+    border-bottom: 1px solid rgb(158, 155, 155);
+    padding: 10px;
+  }
+  #product-dropBtn {
+    border-top: 1px solid rgb(158, 155, 155);
+
+  }
+
+  .product-dropBtn:hover{
+    background-color: rgb(233, 231, 231);
+
+  }
+
+  
+
+
+  
+  
+  /* The container <div> - needed to position the dropdown content */
+  .size-dropdown, .product-dropContent, .about-dropContent, .care-dropContent {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .right {
+    float: right;
+
+  }
+
+  /* Dropdown Content (Hidden by Default) */
+  .size-dropContent {
+    display: none;
+    position: absolute;
+    width: 250px;
+    background-color: #fffcfc;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(48, 47, 47, 0.2);
+    z-index: 1;
+  }
+
+  .sizeFit-dropContent{
+    display: none;
+    padding-left: 5px;
+    padding-bottom: 20px;
+  }
+
+  .product-dropContent {
+    display: none;
+    pointer-events: none;
+    left: -20px;
+  }
+
+  .about-dropContent{
+    padding-top: 5px;
+    padding-left: 5px;
+    display: none;
+    pointer-events: none;
+  }
+  .care-dropContent{
+    display: none;
+    padding-left: 5px;
+
+  }
+
+  .dropContent{
+    padding: 5px;
+  }
+  
+  /* Links inside the dropdown */
+  .size-dropContent p {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+
+  
+  /* Change color of dropdown links on hover */
+  .size-dropContent p:hover {
+    background-color: rgb(233, 231, 231);
+  }
+
+  .show {
+    display:block;
+}
+
+.show-border {
+    border-top: 1px solid bottom;
+    display:block;
+}
+
+.detail-text {
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+.product-details {
+    margin-left: 20px
+}
+
+.product-details p{
+    font-size: 18px;
+}
+
+
+.addToBagBtn{
+    display: block;
+    width: 200px;
+    padding: 20px 30px;
+    margin: 20px 0;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.addToBagBtn:active{
+    box-shadow: 0px 0px 5px 5px rgba(141, 140, 140, 0.4);
+}
+
+.addToBagBtn:hover{
+    background-color: rgb(71, 71, 71);
+}
+
+.shipping-container {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    height: 100px;
+    border: 1px solid rgb(179, 179, 179);
+    justify-content:space-evenly;
+    padding-left: 20px;
+}
