@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Alex+Brush');
+
+.logo{
+    font-size: 80px;
+    font-weight: 900;
+    font-family: 'Alex Brush';
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid black;
+}
+
+.topLogin{
+    border-bottom: 1px solid black;
+    padding-left: 100px;
+}
+
+.login-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+.loginInputs-container{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding-right: 200px;
+    height: 400px;
+}
+
+.login-container input {
+    margin-top: 5px;
+    width: 360px;
+    padding: 10px;
+    font-size: 15px;
+    display: block;
+}
+
+.login-container label {
+    font-weight: bold;
+    margin-top: 5px;
+    display: block;
+
+}
+
+.login-container button {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 385px;
+    padding: 13px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.login-container button:hover {
+    background-color: rgb(71, 71, 71);
+}
+.login-container button:active{
+    box-shadow: 0px 0px 5px 3px rgba(141, 140, 140, 0.4);
+}
+
+.login-container p {
+    font-weight: bold;
+    color: red;
+
+}
+
+.createAccount-container{
+    padding-left: 120px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px black solid;
+
+}
+

@@ -4,7 +4,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    min-width: 600px;
+    min-width: 650px;
     width: 100%;
  }
 
@@ -15,7 +15,6 @@
     color: white;
     background-color: black;
     height: 30px;
-    align-items: center;
     min-height: 40px;
 }
 
@@ -47,12 +46,14 @@
 }
 
 .containerItem{ 
-    padding: 30px;
+    padding: 10px 20px;
     border-right: 1px solid white;
+    cursor: pointer;
 }
 
 .search {
-    padding: 30px;
+    position: relative;
+    padding: 10px 20px;
 }
 
 .icon {
@@ -60,7 +61,7 @@
 }
 
 #magnifying {
-    padding-left: 6px;
+    padding-left: 10px;
     cursor: pointer;
 }
 
@@ -129,4 +130,38 @@
 
 .pointer > p:hover {
     text-decoration: underline;
+}
+
+.nav-dropItems{
+    display: none;
+    position: relative;
+    color: black;
+    background-color: white;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+}
+
+.nav-dropItems > p{
+    padding: 5px
+}
+
+.nav-dropItems > p:hover{
+    text-decoration: underline;
+    font-weight: bold;
+    background-color: rgb(233, 231, 231);
+}
+
+.nav-dropItems:hover{
+    display: block;
+    cursor: pointer;
+}
+
+.user-dropdown{
+    padding: 11px 30px;
+}
+
+.user-dropdown:hover + div {
+    display: block;
 }

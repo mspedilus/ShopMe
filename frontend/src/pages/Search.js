@@ -15,13 +15,16 @@ import { SearchContext } from '../Contexts/SearchContext'
 export default function Search() {
 
   const location = useLocation();
-  const [properties, setProperties] = useState({brand: "", style: "", sort: "", leather: "", color: "", sale: "", category: location.state.category,
-                                                type: "" , bodyFit: "", productName: location.state.searchVal , priceMin: "", priceMax: "", size: ""})
+  const [properties, setProperties] = useState({brand: "", style: "", sort: "", leather: "", color: "", sale: "", 
+                                                category: location.state.category, offset: 0, type: "" , bodyFit: "", 
+                                                productName: location.state.searchVal , priceMin: "", priceMax: "", size: ""})
   const { fetchedData, loading } = useFetch("http://localhost:8800/api/products", properties) //Performs api calls
+  const [currentPage, setCurrentPage] = useState(1)
+
 
   
   return (
-    <SearchContext.Provider value={{properties, setProperties, fetchedData, loading}}>
+    <SearchContext.Provider value={{properties, setProperties, fetchedData, loading, currentPage, setCurrentPage}}>
       <Navbar />
       <SearchTopBar />
       <div className='search-container'>

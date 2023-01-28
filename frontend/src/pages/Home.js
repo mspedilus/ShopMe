@@ -150,7 +150,6 @@ export default function Home() {
         <img onClick={() => handleClick(4564)} src={Abercrombie} alt="Abercrombie logo" />
         <img onClick={() => handleClick(2038)} src={CalvinKlein} alt="Calvin Klein logo" />
       </div>
-      <h2>Recommended For You</h2>
       </section>
 
     <Footer />

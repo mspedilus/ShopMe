@@ -115,12 +115,7 @@ export default function ItemDetails() {
                 <div id="care"></div>
             </div>
           </div>
-
-          </div>
-
-          <div>
-            <h2>Customers also loved</h2>
-          </div>
+        </div>
 
       </div>
       }

@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import "../styles/navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faUser, faCartShopping} from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faUser, faShoppingBag} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate, Link } from 'react-router-dom'
+import { AuthContext } from '../Contexts/AuthContext'
 
 export default function Navbar() {
 
     const [searchVal, setSearchVal] = useState("")
     const navigate = useNavigate()
+    const { user, dispatch } = useContext(AuthContext)
 
     //Redirects page to search results page
     function onSearch(event, categoryId) {
@@ -15,24 +17,50 @@ export default function Navbar() {
             navigate("/search?name="+searchVal, {state: {searchVal, category: categoryId}});
         }
     }
+    function capitalizeFirstLetter(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
 
-  return (
+    function handleLogout(){
+        localStorage.removeItem("user");
+        dispatch({type: "logout"})
+        navigate("/")
+    }
+
+    function handleLogin(){
+        if (user == null) navigate("/login")
+    }
+
+    console.log(user)
+    return (
     <div className="header">
-        <div className="container">
-            <div className='containerItem'>
-                <FontAwesomeIcon icon={faUser} inverse className='icon'/>
-                Login
-            </div>
-            <div className='containerItem'>
-                <FontAwesomeIcon icon={faCartShopping} inverse className='icon'/>
-                Cart 
+            <div className="container">
+                <div>
+                    <div className='containerItem user-dropdown' onClick={handleLogin} >
+                        <FontAwesomeIcon icon={faUser} inverse className='icon'/>
+                        {user !== null ? `Hi, ${capitalizeFirstLetter(user.firstName)}` : "Sign In"}
+                    </div>
+                    { user !== null &&
+                        <div className='nav-dropItems'>
+                            <p onClick={() => navigate("/profile")}>My Account</p>
+                            <p onClick={() => navigate("/purchaseHistory")}>Purchase History</p>
+                            <p onClick={handleLogout}>Logout</p>                        
+                        </div>
+                    }
+                </div>
+ 
+                <div className='containerItem'>
+                    <FontAwesomeIcon icon={faShoppingBag} inverse className='icon'/>
+                    Bag (0) 
+                </div>
+
+                <div className='search'>
+                    <input onKeyDown={onSearch} value={searchVal} className="input" id="searchInput" type="text" onChange={(e) => setSearchVal(e.target.value)} />
+                    <FontAwesomeIcon onClick={onSearch} icon={faMagnifyingGlass} inverse id='magnifying'/>
+                </div>
             </div>
 
-            <div className='search'>
-                <input onKeyDown={onSearch} value={searchVal} className="input" id="searchInput" type="text" onChange={(e) => setSearchVal(e.target.value)} />
-                <FontAwesomeIcon onClick={onSearch} icon={faMagnifyingGlass} inverse id='magnifying'/>
-            </div>
-        </div>
+
         <div className='container2'>
             <div className='titleContainer'>
                 <Link id="title" to="/">Shop Me</Link>
