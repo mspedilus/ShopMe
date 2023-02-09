@@ -4,6 +4,7 @@ import { AuthContext } from '../Contexts/AuthContext'
 import { useNavigate, Link } from 'react-router-dom'
 import "../styles/login.css"
 
+//Login Page
 export default function Login() {
 
   const [credentials, setCredentials] = useState({ email: undefined, password: undefined })
@@ -13,18 +14,24 @@ export default function Login() {
   const [registerError, setRegisterError] = useState("")
   const navigate = useNavigate()
 
+
+  //Stores login values
   function handleLoginChange(e){
     setCredentials((prev) => ({...prev, [e.target.name]: e.target.value}))
   }
 
+
+  //Stores register values
   function handleRegisterChange(e){
     setRegister((prev) => ({...prev, [e.target.name]: e.target.value}))
   }
 
+
+  //Performs login action if credentials are valid
   async function handleLogin(){
     dispatch({type: "start-login"})
     try{
-      const res = await axios.post("http://localhost:8800/api/auth/login", credentials)
+      const res = await axios.post("http://localhost:8800/api/auth/login", credentials) //Validates user
       dispatch({type: "success-login", payload: res.data})
       navigate("/")
     }catch(err){
@@ -32,6 +39,8 @@ export default function Login() {
     }
   }
 
+
+  //Performs register action if credentials are valid
   async function handleRegister(e){
     e.preventDefault()
     dispatch({type: "start-login"})
@@ -52,8 +61,7 @@ export default function Login() {
     }
     else{
       try{
-        const res = await axios.post("http://localhost:8800/api/auth/register", register)
-        console.log(res)
+        const res = await axios.post("http://localhost:8800/api/auth/register", register) //Creates a new user
         dispatch({type: "success-login", payload: res.data})
         navigate("/")
       } catch(err){
@@ -67,9 +75,12 @@ export default function Login() {
   return (
     <div>
 
+      {/* Banner */}
       <div className='topLogin'>
-          <Link id="title" to="/">Shop Me</Link>
+          <Link className="logo" to="/">Shop Me</Link>
       </div>
+
+      {/* Login  */}
       <div className='login-container'>
         <div className='loginInputs-container'>
           <h2>Sign In</h2>
@@ -80,6 +91,8 @@ export default function Login() {
           <button disabled={loading} className='loginBtn' onClick={handleLogin}>Sign In</button>
           {error && <p>{error.message}</p>}
         </div>
+
+        {/* Register */}
         <div className='createAccount-container'>
           <h2>No account yet?</h2>
           <form autofill="off" onSubmit={handleRegister}>
@@ -92,17 +105,15 @@ export default function Login() {
             <label htmlFor="email">Email</label>
             <input type="email" name="email" onChange={handleRegisterChange} id="email" required />
             <label htmlFor="password">Password</label>
-            
             <input type="password" name="password" onChange={handleRegisterChange} id="password" required />
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input type="password" name="confirmPassword" onChange={handleRegisterChange} id="confirmPassword" required />
-            <button type="submit" >Create Account</button>
+            <button disabled={loading} type="submit" >Create Account</button>
           </form>
           {registerError && <p>{registerError}</p>}
         </div>
       </div>
 
-      
     </div>
   )
 }

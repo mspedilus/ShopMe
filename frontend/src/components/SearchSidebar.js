@@ -4,7 +4,7 @@ import PriceOption from './PriceOption'
 
 //Displays sidebar in search page
 export default function Sidebar() {
-  const {properties, setProperties, fetchedData } = useContext(SearchContext)
+  const {properties, setProperties, fetchedData, loading } = useContext(SearchContext)
 
   // Toggles between hiding and showing the dropdown content 
   function showDropdown(x) {
@@ -91,8 +91,8 @@ export default function Sidebar() {
             <div className='results-container'>
               <div className='sidebar'>
                 <div>
-                  {fetchedData.facets !== undefined  ? fetchedData.facets.map(filterOptions) : <></>}
-                  {fetchedData.facets && <button className="updateBtn" onClick={onUpdate}>Update</button>}
+                  {fetchedData.facets.length !== 0  ? fetchedData.facets.map(filterOptions) : <></>}
+                  {fetchedData.facets.length !== 0 && <button className="updateBtn" disabled={loading} onClick={onUpdate}>Update</button>}
                 </div>
               </div>
             </div>

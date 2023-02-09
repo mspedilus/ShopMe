@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react"
 import { useLocation } from 'react-router-dom'
-
 import axios from "axios"
 
 //Retrieves data from api
@@ -19,7 +18,9 @@ const useFetch = (url, properties) => {
             const state = getState()
             setLoading(true)
             try {
-                const res = await axios.get(url, {params: {...properties, "productName": state.searchVal, "category": state.category}});
+                const res = await axios.get(url, { withCredentials: true }, 
+                                            {params: {...properties, "productName": state ? state.searchVal : "",
+                                                                     "category": state ? state.category : "" }});
                 setFetchedData(res.data)
             } catch (err) {
                 setError(err)  

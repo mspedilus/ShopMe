@@ -43,7 +43,6 @@ router.post("/login", async (req, res, next) => {
 
         //Decrypts password and checks if email and password matches a user in MongoDB
         const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password) 
-        console.log(isPasswordCorrect)
         if(!isPasswordCorrect) return next(createError(400, "Wrong password or username."));
 
         //Creates and sends json web token

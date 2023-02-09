@@ -72,6 +72,7 @@
 
   .product-dropBtn:hover{
     background-color: rgb(233, 231, 231);
+    
 
   }
   
@@ -142,12 +143,12 @@
   }
 
   .show {
-    display:block;
+    display: block;
 }
 
 .show-border {
     border-top: 1px solid bottom;
-    display:block;
+    display: block;
 }
 
 .detail-text {
@@ -175,13 +176,15 @@
     font-weight: bold;
     border: none;
     cursor: pointer;
+    font-size: 15px;
+
 }
 
-.addToBagBtn:active{
+.addToBagBtn:active, .modal-container button:active {
     box-shadow: 0px 0px 5px 3px rgba(141, 140, 140, 0.4);
 }
 
-.addToBagBtn:hover{
+.addToBagBtn:hover, .modal-container button:hover{
     background-color: rgb(71, 71, 71);
 }
 
@@ -194,4 +197,64 @@
     border: 1px solid rgb(179, 179, 179);
     justify-content:space-evenly;
     padding-left: 20px;
+}
+
+.modal {
+  background-color: white;
+  width: 600px;
+  max-width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 30px 50px;
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(141, 140, 140, 0.4);
+  opacity: 0;
+  pointer-events: none;
+
+}
+
+.modal-container.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-container button {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  margin-right: 20px;;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 130px;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-items{
+  display: flex;
+}
+
+.modal-items > img {
+  max-width: 200px;
+  width: 100%;
+}
+
+.modal-details > p {
+  padding-bottom: 15px;
+
 }

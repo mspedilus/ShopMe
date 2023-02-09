@@ -14,6 +14,11 @@ router.get("/checkUser/:id", verifyUser, (req, res, next) => {
     res.send("Hello user, you are logged in")
 })
 
+router.get("/profile", verifyToken, async (req, res, next) => {
+    const id = req.user.id
+    const userInfo = await User.findById(id)
+    res.status(200).json(userInfo)
+})
 
 //Creates a new user
 router.post("/", async (req, res, next) => {

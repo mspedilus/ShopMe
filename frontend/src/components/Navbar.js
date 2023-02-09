@@ -31,7 +31,6 @@ export default function Navbar() {
         if (user == null) navigate("/login")
     }
 
-    console.log(user)
     return (
     <div className="header">
             <div className="container">
@@ -42,16 +41,15 @@ export default function Navbar() {
                     </div>
                     { user !== null &&
                         <div className='nav-dropItems'>
-                            <p onClick={() => navigate("/profile")}>My Account</p>
-                            <p onClick={() => navigate("/purchaseHistory")}>Purchase History</p>
+                            <p onClick={() => navigate("/account")}>My Account</p>
                             <p onClick={handleLogout}>Logout</p>                        
                         </div>
                     }
                 </div>
  
-                <div className='containerItem'>
+                <div className='containerItem' onClick={() => navigate("/viewBag")}>
                     <FontAwesomeIcon icon={faShoppingBag} inverse className='icon'/>
-                    Bag (0) 
+                    Bag
                 </div>
 
                 <div className='search'>

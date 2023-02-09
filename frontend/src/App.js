@@ -14,11 +14,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" exact element={<Home />} />
-        <Route path="/viewCart" element={<ViewCart />} />
+        <Route path="/viewBag" element={<ViewCart />} />
         <Route path="/search" element={<Search />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/account" element={<Profile />} />
         <Route path="/itemDetails" element={<ItemDetails />} />
         <Route path="/purchaseHistory" element={<PurchaseHistory />} />
       </Routes>

@@ -2,9 +2,11 @@ import React, {useState, useContext} from 'react'
 import { SearchContext } from '../Contexts/SearchContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { useLocation } from 'react-router-dom';
 
 //Displays top bar of search page
 export default function SearchTopBar() {
+  const location = useLocation()
   const {properties, setProperties, fetchedData} = useContext(SearchContext)
   const [sortOption, setSortOption] = useState("New Arrivals")
 
@@ -46,9 +48,9 @@ export default function SearchTopBar() {
 
   return (
     <div>
-        {/* Top bar */}
+        {/* Top bar in Search Page*/}
         <div className='search-top'>
-            <p>We found {fetchedData.itemCount || "0"} items you might like for {properties.productName}</p>
+            <p>We found {fetchedData.itemCount || "0"} items you might like for {location.state.searchVal}</p>
             <div className="sort-dropdown">
                 <button onClick={() => showDropdown("sort")} className="sort-dropBtn" >{sortOption} &emsp; <FontAwesomeIcon icon={faAngleDown} className='unclickable'/></button>
                 <div id="sort" className="sort-dropContent">

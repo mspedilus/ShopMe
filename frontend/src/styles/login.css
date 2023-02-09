@@ -6,12 +6,19 @@
     font-family: 'Alex Brush';
     text-decoration: none;
     color: black;
-    border-bottom: 1px solid black;
+    background-color: white;
+    padding: 0 20px;
+    margin: auto 0;
+    position: relative;
+    top: 10px;  
+    border-radius: 10px;
 }
 
 .topLogin{
+    height: 120px;
     border-bottom: 1px solid black;
     padding-left: 100px;
+    background-color: black;
 }
 
 .login-container{
