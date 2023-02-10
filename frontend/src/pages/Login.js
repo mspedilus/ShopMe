@@ -65,6 +65,7 @@ export default function Login() {
         dispatch({type: "success-login", payload: res.data})
         navigate("/")
       } catch(err){
+        alert("An error has occured. Please try again.")
         console.log("Error:", err)
       }
     }

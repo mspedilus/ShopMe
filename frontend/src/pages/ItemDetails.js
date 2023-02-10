@@ -16,7 +16,8 @@ export default function ItemDetails() {
   const [properties] = useState({id: location.state.id})
   const { fetchedData, loading } = useFetch("http://localhost:8800/api/products/details", properties) //Performs api calls
   const [size, setSize] = useState("")
-  const [bagItems, setBagItems] = useState(JSON.parse(localStorage.getItem("bag")))
+  const bag = JSON.parse(localStorage.getItem("bag")) || []
+  const [bagItems, setBagItems] = useState(bag)
 
   //Turns the fetchedData string into usable html
   var stringToHTML = function (str, id) {
@@ -73,16 +74,17 @@ export default function ItemDetails() {
     }
 
     document.getElementById("modal-container").classList.add("show");
-
     var itemInBag = false
     var index = 0;
 
     //Checks to see if item is already in bag
-    for(let x = 0; x < bagItems.length; x++){
-      if(Object.values(bagItems[x]).indexOf(fetchedData.id) >= 0 && bagItems[x].size === size){
-        itemInBag = true
-        index = x
-        break
+    if (bagItems !== null){
+      for(let x = 0; x < bagItems.length; x++){
+        if(Object.values(bagItems[x]).indexOf(fetchedData.id) >= 0 && bagItems[x].size === size){
+          itemInBag = true
+          index = x
+          break
+        }
       }
     }
 
@@ -94,17 +96,17 @@ export default function ItemDetails() {
       localStorage.setItem("bag", JSON.stringify(newArr))
     }
     else{ //Else Add item to bag
-      const newBag = [...bagItems, { brand: fetchedData.brand.name, name: fetchedData.name, quantity: 1,
+
+      const newBag = [...bagItems, { name: fetchedData.name, quantity: 1,
                                      color: fetchedData.media.images[0].colour, size: size, 
-                                     price: fetchedData.price.current.value, id: fetchedData.id, 
-                                     imgUrl: `https://${fetchedData.media.images[0].url}`} ]
+                                     currPrice: fetchedData.price.current.value, id: fetchedData.id, 
+                                     imgUrl: `https://${fetchedData.media.images[0].url}`,
+                                     prevPrice: fetchedData.price.isMarkedDown ? fetchedData.price.previous.text : 0 }]
       setBagItems(newBag)
-      console.log(newBag)
       localStorage.setItem("bag", JSON.stringify(newBag))
     }
 
   }
-
 
   return (
     <div>

@@ -4,7 +4,7 @@ import axios from "axios"
 
 //Retrieves data from api
 const useFetch = (url, properties) => {
-    const [fetchedData, setFetchedData] = useState({facets: []})
+    const [fetchedData, setFetchedData] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const location = useLocation();

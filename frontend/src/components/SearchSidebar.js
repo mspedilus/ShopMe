@@ -91,8 +91,8 @@ export default function Sidebar() {
             <div className='results-container'>
               <div className='sidebar'>
                 <div>
-                  {fetchedData.facets.length !== 0  ? fetchedData.facets.map(filterOptions) : <></>}
-                  {fetchedData.facets.length !== 0 && <button className="updateBtn" disabled={loading} onClick={onUpdate}>Update</button>}
+                  {fetchedData !== "" && fetchedData.facets.map(filterOptions)}
+                  {fetchedData !== "" && fetchedData.itemCount > 0 && <button className="updateBtn" disabled={loading} onClick={onUpdate}>Update</button>}
                 </div>
               </div>
             </div>

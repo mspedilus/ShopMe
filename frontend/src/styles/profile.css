@@ -1,3 +1,8 @@
+.profile-container {
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
 .account h1 {
     padding: 0;
     margin: 0;
@@ -11,10 +16,68 @@
     border: 5px inset rgb(170, 169, 169);
 }
 
+.profile button {
+    margin-top: 10px;
+    background-color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile input {
+    margin: 3px 0;
+    padding: 2px;
+}
+
+.profile button:active{
+    background-color: rgb(233, 231, 231);
+}
+
 .purchases{
     max-width: 750px;
     padding: 20px;
     width: 100%;
     margin: 20px auto;
     border: 5px outset rgb(170, 169, 169);
+}
+
+#noOrdersMsg{
+    margin-top: 15px;
+}
+
+.purchases-dropBtn {
+    margin-top: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(235, 235, 235);
+}
+
+.purchaseIcon{
+    align-self: center;
+}
+
+.order-dropContent {
+    display: flex;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.order-dropContent img {
+    width: 110px;
+}
+
+.order-dropContent p {
+    margin: 0 10px 5px 10px;
+
+}
+
+.order-container {
+    display: none;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
 }
