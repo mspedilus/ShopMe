@@ -65,7 +65,7 @@ export default function Navbar() {
 
                 {/* Search Navigation */}
                 <div className='search'>
-                    <input onKeyDown={onSearch} value={searchVal} className="input" id="searchInput" type="text" onChange={(e) => setSearchVal(e.target.value)} />
+                    <input onKeyDown={onSearch} value={searchVal || ""} className="input" id="searchInput" type="text" onChange={(e) => setSearchVal(e.target.value)} />
                     <FontAwesomeIcon onClick={onSearch} icon={faMagnifyingGlass} inverse id='magnifying'/>
                 </div>
             </div>
