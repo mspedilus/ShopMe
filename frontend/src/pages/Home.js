@@ -1,5 +1,11 @@
-import React, { useEffect } from 'react'
 import "../styles/home.css"
+import React, { useEffect, useRef } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import { useNavigate } from 'react-router-dom'
+
 import Header1 from "../assets/header1.jpg"
 import Header2 from "../assets/header2.jpg"
 import Skincare from "../assets/skincare.jpg"
@@ -9,48 +15,43 @@ import NewArrival from "../assets/newArrivals.jpg"
 import ActiveWear from "../assets/activeWear.jpg"
 import PlusSize from "../assets/plusSize.jpg"
 import Bags from "../assets/bags.jpg"
-
 import Adidas from "../assets/adidas.png"
 import CalvinKlein from "../assets/calvinKlein.jpeg"
 import Abercrombie from "../assets/abercrombie.png"
-import NorthFace from "../assets/northFace.jpg"
-import TommyHilfiger from "../assets/tommyHilfiger.png"
+import NorthFace from "../assets/northFace.png"
+import TommyHilfiger from "../assets/tommyHilfiger.jpg"
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import { useNavigate } from 'react-router-dom'
 
 //Homepage
 export default function Home() {
+  const intervalRef = useRef(0)
   var navigate = useNavigate()
   var slideIndex = 1;
 
   //Starts automatic slideshow
   useEffect(() => {
-    const interval = setInterval(plusSlides, 9000, 1);
+    const interval = setInterval(plusSlides, 6000, 1);
+    intervalRef.current = interval
     showSlides(slideIndex);
     return () => clearInterval(interval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  })
   
   //Performs left and right arrow action to switch photos in the slideshow
-  function plusSlides(n){
+  function plusSlides(n, x){
     if (n < 0){
-      showSlides(slideIndex -= 1); 
+      showSlides(slideIndex -= 1, x); 
     } else {
-    showSlides(slideIndex += 1); 
+    showSlides(slideIndex += 1, x); 
     }
   }
 
   //Goes directly to the nth photo in the slideshow
-  function currentSlide(n){
-    showSlides(slideIndex = n);
+  function currentSlide(n, x){
+    showSlides(slideIndex = n, x);
   }
 
   //Shows or hides photos for slideshow effect
-  function showSlides(n){
+  function showSlides(n, x){
     var i;
     var slides = document.getElementsByClassName("mySlides");
     var dots = document.getElementsByClassName("dot");
@@ -64,23 +65,34 @@ export default function Home() {
     slides[slideIndex-1].style.display = "block";
     dots[slideIndex-1].style.backgroundColor = "#252525";
 
+    //Resets interval
+    if (x === 1){
+      const interValId = intervalRef.current
+      clearInterval(interValId)
+      const interval = setInterval(plusSlides, 6000, 1);
+      intervalRef.current = interval
+    }
+
   }
 
+  //Navigates to search page
   function handleClick (categoryId) {
     navigate("/search?name=", {state: {searchVal: "", category: categoryId}});
   }
 
 
   return (
-    <div >
+    <div>
       <Navbar />
+    
+      {/* Slideshow */}
 
       <div className='slideshow'>
-        <FontAwesomeIcon icon={faAngleLeft} className='icon arrow' onClick={() => plusSlides(-1)} size="2xl"/>
+        <FontAwesomeIcon icon={faAngleLeft} className='icon arrow' onClick={() => plusSlides(-1, 1)} size="2xl"/>
         <div className="slideshow-inner">
           <div className="mySlides">
             <img className="slideImgs" src={Header1} alt="3 images of a woman posing" />
-            <div className="text">Trendy And Affordable Fashion For Every Occasion</div>
+            <div className="text">Trendy and affordable fashion for every occasion</div>
           </div>
 
           <div className="mySlides">
@@ -98,17 +110,18 @@ export default function Home() {
             <div className="text">Shop the best deals on shoes</div>
           </div>
         </div>
-        <FontAwesomeIcon icon={faAngleRight} className='icon arrow 'onClick={() => plusSlides(1)} size="2xl"/>
+        <FontAwesomeIcon icon={faAngleRight} className='icon arrow 'onClick={() => plusSlides(1, 1)} size="2xl"/>
       </div>
 
-
-
     <div className='dotContainer'>
-      <span className="dot" onClick={() => currentSlide(1)}></span>
-      <span className="dot" onClick={() => currentSlide(2)}></span>
-      <span className="dot" onClick={() => currentSlide(3)}></span>
-      <span className="dot" onClick={() => currentSlide(4)}></span>
+      <span className="dot" onClick={() => currentSlide(1, 1)}></span>
+      <span className="dot" onClick={() => currentSlide(2, 1)}></span>
+      <span className="dot" onClick={() => currentSlide(3, 1)}></span>
+      <span className="dot" onClick={() => currentSlide(4, 1)}></span>
     </div>
+
+
+      {/* Images */}
 
       <section className="categories">
         <div className='firstRow'>
@@ -143,11 +156,12 @@ export default function Home() {
       </div>
       <h2>Shop By Brands</h2>
 
+      {/* Logos */}
       <div className='thirdRow'>
         <img onClick={() => handleClick(5906)} src={Adidas} alt="Adidas logo" />
-        <img onClick={() => handleClick(5247)} src={TommyHilfiger} alt="Tommy Hilfiger logo" />
         <img onClick={() => handleClick(19899)} src={NorthFace} alt="North Face logo" />
         <img onClick={() => handleClick(4564)} src={Abercrombie} alt="Abercrombie logo" />
+        <img onClick={() => handleClick(5247)} src={TommyHilfiger} alt="Tommy Hilfiger logo" />
         <img onClick={() => handleClick(2038)} src={CalvinKlein} alt="Calvin Klein logo" />
       </div>
       </section>

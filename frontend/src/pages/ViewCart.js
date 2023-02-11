@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
 import "../styles/viewCart.css"
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 //View Bag Page
 export default function ViewCart() {
@@ -43,10 +43,10 @@ export default function ViewCart() {
   //Displays all items in the shopping bag
   const displayItems = (item, i) => {
     return(
-      <div className="cart-items" key={i}>
-          <img src={item.imgUrl} alt={item.name} />
+      <div className="cart-items" key={item.id}>
+          <img src={item.imgUrl} alt={item.name} onClick={() => navigate("/itemDetails", {state: {id: item.id}})}/>
           <div className="cart-details">
-            <p><span className='bold'>{item.name}</span></p>
+            <p><span className='bold link' onClick={() => navigate("/itemDetails", {state: {id: item.id}})}>{item.name}</span></p>
             <p><span className='bold'>Color: </span>{item.color}</p>
             <p><span className='bold'>Size: </span>{item.size}</p>
             <p><span className='bold'> Quantity: </span>
@@ -55,7 +55,7 @@ export default function ViewCart() {
             <FontAwesomeIcon icon={faPlus} className='quantity' size="xs" onClick={() => handleQuantity(i, "add")}/></p>
             <button onClick={() => handleDelete(i)}>Remove</button>
           </div>
-          <p className='float'><span className='bold'>${(item.currPrice).toFixed(2)}</span> <span className='markedDown bold'>{item.prevPrice}</span></p>
+          <p className='float'><span className='bold'>${(item.currPrice).toFixed(2)}</span> {item.prevPrice !== 0 && <span className='markedDown bold'>{item.prevPrice}</span>}</p>
       </div>
     )
   }
@@ -74,6 +74,7 @@ export default function ViewCart() {
     }
   }, [bagItems])
 
+  //Adds item to mongodb & navigates to purchase history page
   async function handleCheckout() {
     if (bagItems !== null){
       document.getElementById("confirmation").classList.add("show")
@@ -99,11 +100,15 @@ export default function ViewCart() {
     <>
     <Navbar />
     <div className='viewCart-container'>
+
+      {/* Shopping Bag */}
       <div className="item-conatiner">
-      <h1>Shopping Bag</h1>
-      <p id="itemCount">You have {bagItems !== null ? bagCount : 0} item(s) in your bag</p>
-      {bagItems !== null ? bagItems.map(displayItems) : <div id="null"> </div>}
+        <h1>Shopping Bag</h1>
+        <p id="itemCount">You have {bagItems !== null ? bagCount : 0} item(s) in your bag</p>
+        {bagItems !== null ? bagItems.map(displayItems) : <div id="null"> </div>}
       </div>
+
+      {/* Order Summary */}
       <div>
         <div className="checkout">
           <h2>Order Summary</h2>
@@ -116,12 +121,14 @@ export default function ViewCart() {
       </div>
     </div>
 
+    {/* Order Confirmation Modal */}
     <div className='checkout-confirmation' id="confirmation">
       <div className='checkout-msg'>
         <h1>Thank you for your order!</h1>
         <p>We appreciate your business</p>
       </div>
     </div>
+    
     <Footer />
     </>
   )

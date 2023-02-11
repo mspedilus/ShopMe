@@ -1,10 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { SearchContext } from '../Contexts/SearchContext'
 import PriceOption from './PriceOption'
 
 //Displays sidebar in search page
 export default function Sidebar() {
+
+  const [searchResults, setSearchResults] = useState("")
   const {properties, setProperties, fetchedData, loading } = useContext(SearchContext)
+
+  if (fetchedData !== "" && searchResults === ""){
+    setSearchResults(fetchedData)
+  }
+
+  console.log("sidebar", fetchedData)
+  console.log("searchResults", searchResults)
 
   // Toggles between hiding and showing the dropdown content 
   function showDropdown(x) {
@@ -42,7 +51,7 @@ export default function Sidebar() {
     var brand = []
     var style = [] //attribute_1046
     var priceMin = document.getElementById("priceMin").value
-    var priceMax = document.getElementById("priceMax").value
+    var priceMax = document.getElementById("priceMax").value 
     var leather = [] //attribute_10147
     var color = [] //base_colour
     var sale = [] //range
@@ -75,14 +84,15 @@ export default function Sidebar() {
     size = size.toString()
 
     //Ensures price range is valid
-    if(priceMax < priceMin ) alert("Please enter a price range from 1 to 9999")
+    if ((priceMax < priceMin) && priceMax !== "" ) alert("Please enter a price range from 1 to 99999")
     else {
       if(priceMin === "" && priceMax !== "") priceMin = 0
       setProperties((prev) => { return ({...prev, brand: brand, style: style, leather: leather, 
                                             color: color, sale: sale, type: type, bodyFit: bodyFit, 
                                             priceMin: priceMin, priceMax: priceMax, size: size })} )
     }
-    
+
+    window.scrollTo(0, 0); //Scrolls to top of page
   }
 
 
@@ -91,8 +101,8 @@ export default function Sidebar() {
             <div className='results-container'>
               <div className='sidebar'>
                 <div>
-                  {fetchedData !== "" && fetchedData.facets.map(filterOptions)}
-                  {fetchedData !== "" && fetchedData.itemCount > 0 && <button className="updateBtn" disabled={loading} onClick={onUpdate}>Update</button>}
+                  {searchResults && searchResults.products.length > 0 && searchResults.facets.map(filterOptions)}
+                  {searchResults && searchResults.products.length > 0 && <button className="updateBtn" disabled={loading} onClick={onUpdate}>Update</button>}
                 </div>
               </div>
             </div>

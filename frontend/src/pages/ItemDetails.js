@@ -14,7 +14,7 @@ export default function ItemDetails() {
   const navigate = useNavigate()
   const location = useLocation();
   const [properties] = useState({id: location.state.id})
-  const { fetchedData, loading } = useFetch("http://localhost:8800/api/products/details", properties) //Performs api calls
+  const { fetchedData, loading } = useFetch("http://localhost:8800/api/products/details", properties) //Performs api calls to get product information
   const [size, setSize] = useState("")
   const bag = JSON.parse(localStorage.getItem("bag")) || []
   const [bagItems, setBagItems] = useState(bag)
@@ -109,7 +109,8 @@ export default function ItemDetails() {
   }
 
   return (
-    <div>
+    <>
+    <div className="itemDetails-container">
       <Navbar />
       {loading ? <Loading /> : 
       fetchedData.media &&
@@ -183,7 +184,6 @@ export default function ItemDetails() {
             <div className="modal-items">
                 <img src={`https://${fetchedData.media.images[0].url}`} alt={fetchedData.name} />
                 <div className="modal-details">
-                  <p>{fetchedData.brand.name}</p>
                   <p>{fetchedData.name}</p>
                   <p>Color: {fetchedData.media.images[0].colour}</p>
                   <p>Size: {size}</p>
@@ -198,6 +198,8 @@ export default function ItemDetails() {
         </div>
       </div>
       }
+     </div>
+
     <Footer />
 
 
@@ -206,7 +208,6 @@ export default function ItemDetails() {
     {document.getElementById("about") !== null && fetchedData.id !== undefined && stringToHTML(fetchedData.info.aboutMe, "about")}
     {document.getElementById("sizeFit") !== null && fetchedData.id !== undefined && stringToHTML(fetchedData.info.sizeAndFit, "sizeFit")}
     {document.getElementById("care") !== null && fetchedData.id !== undefined && stringToHTML(fetchedData.info.careInfo, "care")}
-
-    </div>
+  </>
   )
 }

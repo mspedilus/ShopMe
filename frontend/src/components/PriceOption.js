@@ -10,7 +10,7 @@ export default function PriceOption(props) {
         <button className="filterBtn" onClick={() => props.showDropdown("price")}>Price</button>
         <div id="price" className="filter-dropContent" >
             <input type="number" value={priceMin} id="priceMin" min="0" placeholder='Min' onChange={(e) => setPriceMin(e.target.value)}/>to
-            <input type="number" value={priceMax} id="priceMax" min="0" max="9999" placeholder='Max' onChange={(e) => setPriceMax(e.target.value)}/>
+            <input type="number" value={priceMax} id="priceMax" min="0" max="99999" placeholder='Max' onChange={(e) => setPriceMax(e.target.value)}/>
         </div>
     </div>
   )

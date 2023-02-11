@@ -4,6 +4,8 @@ import USA from "../assets/US.gif"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram, faPinterest, faTiktok, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
 
+
+//Displays Footer
 export default function Footer() {
 
     //Dispalys thank you message after filling out newsletter sign up
@@ -17,6 +19,7 @@ export default function Footer() {
 
  <footer>
 
+    {/* Left Hand Text */}
     <div className='footer'>
         <div>
             <h4>Customer Service</h4>
@@ -40,6 +43,7 @@ export default function Footer() {
         </div>
 
 
+        {/* Right Hand Text */}
         <div className="rightFooter"> 
             <div className="rightFooterItem">
                 <h4>Be The First To Know With Our Emails</h4>
@@ -70,7 +74,7 @@ export default function Footer() {
         </div>
     </div>
 
-
+    {/* Bottom Text */}
     <div className='footer2'>
         <p>Privacy Notice | Cookie Preferences | Interest Based Ads | CA Privacy Rights | Do Not Sell or Share My Personal Information | Legal Notice</p>
         <p>Customer Bill of Rights | CA Transparency in Supply Chains | Product Recalls | Pricing Policy | Essential Accessibility</p>

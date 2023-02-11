@@ -1,6 +1,6 @@
+import "../styles/search.css"
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
-import "../styles/search.css"
 import Footer from '../components/Footer'
 import useFetch from '../components/useFetch'
 import { useLocation } from 'react-router-dom'

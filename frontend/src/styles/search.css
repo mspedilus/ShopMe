@@ -137,9 +137,8 @@ input[type=number] {
     cursor: pointer;
 }
 
-
 .updateBtn:active{
-    box-shadow: 0px 0px 5px 3px rgba(141, 140, 140, 0.4);
+    box-shadow: 0px 0px 5px 2px rgba(141, 140, 140, 0.4);
 }
 
 .updateBtn:hover{
@@ -160,10 +159,12 @@ input[type=number] {
 }
 
 .loading{
+    position: fixed;
+    display: flex;
+    left: 50vw;
     height: 100vh;
+    width: 50px;
     margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 330px;
 }
 
 .page-container{
@@ -209,4 +210,10 @@ input[type=number] {
     border: 1px solid black; 
     text-align: center;
     margin: 0 5px;
+}
+
+
+.link:hover{
+   text-decoration: underline;
+   cursor: pointer;
 }

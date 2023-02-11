@@ -51,6 +51,7 @@ export default function SearchTopBar() {
         {/* Top bar in Search Page*/}
         <div className='search-top'>
             <p>We found {fetchedData.itemCount || "0"} items you might like for {location.state.searchVal}</p>
+            { fetchedData.itemCount > 0 &&
             <div className="sort-dropdown">
                 <button onClick={() => showDropdown("sort")} className="sort-dropBtn" >{sortOption} &emsp; <FontAwesomeIcon icon={faAngleDown} className='unclickable'/></button>
                 <div id="sort" className="sort-dropContent">
@@ -59,6 +60,7 @@ export default function SearchTopBar() {
                     <p onClick={() => handleSort("pricedesc")} >Price: High to Low</p>
                 </div>
             </div>
+            }
         </div>
     </div>
   )

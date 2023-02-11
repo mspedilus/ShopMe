@@ -1,25 +1,28 @@
-import React, { useState } from 'react'
 import "../styles/profile.css"
+import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer';
 import useFetch from '../components/useFetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
+import Loading from "../components/Loading";
 
-
+//Displays Profile Page
 export default function Profile() {
   const user = JSON.parse(localStorage.getItem("user"))
   const fullName = user.firstName + " " + user.lastName
   const [profileData, setProfileData] = useState({...user, fullName: fullName})
-  const {fetchedData, loading} = useFetch("http://localhost:8800/api/products/getOrders")
+  const {fetchedData, loading} = useFetch("http://localhost:8800/api/products/getOrders") //Api call to get order history
   const [error, setError] = useState("")
+  const [showEdit, setShowEdit] = useState(false)
 
   // Toggles between hiding and showing the dropdown content 
   function showDropdown(x) {
     document.getElementById(x).classList.toggle("show");
   }
 
+  //Displays all orders available
   const displayOrders = (order, i) => {
     const details = JSON.parse(order.order)
     return (
@@ -42,6 +45,7 @@ export default function Profile() {
     )
   }
 
+
   const displayDetails = (item) => {
     return (
         <div className='order-dropContent'>
@@ -57,10 +61,12 @@ export default function Profile() {
     )
   }
 
+  //Updates profileData
   function handleChange(e){
     setProfileData((prev) =>{ return {...prev, [e.target.name]: e.target.value}} ) 
   }
 
+  //Updates user info in mongodb
   async function handleSave(){
     if(profileData.phoneNum === ""){  //Checks if phone number is empty
       setError("Please enter a phone number.")
@@ -83,32 +89,35 @@ export default function Profile() {
       return
     }
     else{
+
+      //Performs put method
       try{
         const name = profileData.fullName.split(" ")
-        const newArr = {...profileData, firstName: name[0], lastName: name[1]}
-        const res = await axios.put("http://localhost:8800/api/users/" + user._id, { withCredentials: true }, newArr) 
-        setProfileData(res)
+        const newArr = {...profileData, firstName: name[0], lastName: name.slice(1).join(" ")}
+        const res = await axios.put("http://localhost:8800/api/users/" + user._id, newArr) 
+        const fullName = res.data.firstName + " " + res.data.lastName
+        localStorage.setItem("user", JSON.stringify({...res.data, fullName: fullName}))
+        setProfileData(res.data)
+        document.location.reload();
       } catch(err){
-        alert("An error has occured. Please try again.")
+        alert("An error has occured. Please try again later.")
         console.log("Error:", err)
       }
+
     }
   } 
+
 
   return (
 
     <div >
       <div className='profile-container'>
       <Navbar />
-      { !loading && 
+
+      {/* Profile */}
+      { loading ? <Loading /> :  
       <div className='account'>
-        <div className='profile' >
-          <h1>Profile</h1>
-          <p>Name: {profileData.firstName} {profileData.lastName}</p>
-          <p>Email: {profileData.email}</p>
-          <p>Phone Number: {profileData.phoneNum}</p>
-          <button>Edit</button>
-        </div>
+        {showEdit ?  
         <div className='profile' >
           <h1>Profile</h1>
           <div>
@@ -124,8 +133,20 @@ export default function Profile() {
             <input type="text" name="phoneNum" value={profileData.phoneNum} onChange={(e) => handleChange(e)} required/>
           </div>
           <button onClick={handleSave}>Save</button>
+          <button onClick={() => setShowEdit(false)}>Cancel</button>
           <p className='error'>{error}</p>
         </div>
+        :
+        <div className='profile' >
+          <h1>Profile</h1>
+          <p>Name: {profileData.firstName} {profileData.lastName}</p>
+          <p>Email: {profileData.email}</p>
+          <p>Phone Number: {profileData.phoneNum}</p>
+          <button onClick={() => setShowEdit(true)}>Edit</button>
+        </div>
+        }
+
+      {/* Purchase History */}
         <div className='purchases'>
           <h1>Purchase History</h1>
           <div className='order-dropdown'>

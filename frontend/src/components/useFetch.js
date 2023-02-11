@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from "react"
 import { useLocation } from 'react-router-dom'
 import axios from "axios"
+axios.defaults.withCredentials = true
 
-//Retrieves data from api
+
+//Makes api calls
 const useFetch = (url, properties) => {
     const [fetchedData, setFetchedData] = useState("")
     const [loading, setLoading] = useState(false)
@@ -18,7 +20,7 @@ const useFetch = (url, properties) => {
             const state = getState()
             setLoading(true)
             try {
-                const res = await axios.get(url, { withCredentials: true }, 
+                const res = await axios.get(url, 
                                             {params: {...properties, "productName": state ? state.searchVal : "",
                                                                      "category": state ? state.category : "" }});
                 setFetchedData(res.data)

@@ -79,6 +79,7 @@ h3, p, h4 {
     width: 250px;
     cursor: pointer;
     margin-bottom: 100px;
+    margin-right: 20px;
 }
 
 .slideshow {

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { SearchContext } from '../Contexts/SearchContext'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,7 +15,7 @@ export default function SearchProductList() {
   const productItems = (product, i) => {
       return <div key={i} className='grid-item'>
                 <img id={product.id} src={`https://${product.imageUrl}`} alt={product.name} onClick={() => navigate("/itemDetails", {state: {id: product.id}})} />
-                <p id={product.id}>{product.name}</p>
+                <p className="link" id={product.id} onClick={() => navigate("/itemDetails", {state: {id: product.id}})}>{product.name}</p>
                 { product.price.isMarkedDown === true ? 
                     <>
                         <p className='crossedText'>${product.price.previous.value}</p>   
@@ -82,10 +82,13 @@ export default function SearchProductList() {
 
   return (
     <div>
+      
         {/* Grid display of products */}
         <div className='grid-container'>
             {fetchedData.products !== undefined ? fetchedData.products.map(productItems) : <></> }
         </div>
+        
+        {/* Page Dropdown */}
         { !loading && fetchedData.itemCount > 0 && 
           <div className='page-container'>
            {properties.offset > 1 && <FontAwesomeIcon icon={faAngleLeft} className='arrow' onClick={() => changePage("prev")} size="xl"/>}
@@ -98,6 +101,7 @@ export default function SearchProductList() {
             {maxPage !== currentPage && <FontAwesomeIcon icon={faAngleRight} className='arrow 'onClick={() => changePage("next")} size="xl"/>}
           </div>
         }
+
     </div>
   )
 }
