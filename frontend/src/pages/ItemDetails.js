@@ -11,10 +11,11 @@ import { useLocation, useNavigate } from 'react-router-dom'
 //Displays the product details page
 export default function ItemDetails() {
 
+
   const navigate = useNavigate()
   const location = useLocation();
   const [properties] = useState({id: location.state.id})
-  const { fetchedData, loading } = useFetch("http://localhost:8800/api/products/details", properties) //Performs api calls to get product information
+  const { fetchedData, loading } = useFetch(process.env.REACT_APP_URL + "/products/details", properties) //Performs api calls to get product information
   const [size, setSize] = useState("")
   const bag = JSON.parse(localStorage.getItem("bag")) || []
   const [bagItems, setBagItems] = useState(bag)

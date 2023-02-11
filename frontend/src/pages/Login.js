@@ -61,7 +61,7 @@ export default function Login() {
     }
     else{
       try{
-        const res = await axios.post("http://localhost:8800/api/auth/register", register) //Creates a new user
+        const res = await axios.post(process.env.REACT_APP_URL + "/auth/register", register) //Creates a new user
         dispatch({type: "success-login", payload: res.data})
         navigate("/")
       } catch(err){

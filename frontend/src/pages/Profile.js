@@ -10,10 +10,11 @@ import Loading from "../components/Loading";
 
 //Displays Profile Page
 export default function Profile() {
+  
   const user = JSON.parse(localStorage.getItem("user"))
   const fullName = user.firstName + " " + user.lastName
   const [profileData, setProfileData] = useState({...user, fullName: fullName})
-  const {fetchedData, loading} = useFetch("http://localhost:8800/api/products/getOrders") //Api call to get order history
+  const {fetchedData, loading} = useFetch(process.env.REACT_APP_URL  + "/products/getOrders") //Api call to get order history
   const [error, setError] = useState("")
   const [showEdit, setShowEdit] = useState(false)
 
@@ -94,7 +95,7 @@ export default function Profile() {
       try{
         const name = profileData.fullName.split(" ")
         const newArr = {...profileData, firstName: name[0], lastName: name.slice(1).join(" ")}
-        const res = await axios.put("http://localhost:8800/api/users/" + user._id, newArr) 
+        const res = await axios.put(process.env.REACT_APP_URL + "/users/" + user._id, newArr) 
         const fullName = res.data.firstName + " " + res.data.lastName
         localStorage.setItem("user", JSON.stringify({...res.data, fullName: fullName}))
         setProfileData(res.data)
