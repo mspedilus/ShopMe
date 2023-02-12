@@ -18,7 +18,7 @@ export default function Search() {
   const [properties, setProperties] = useState({brand: "", style: "", sort: "", leather: "", color: "", sale: "", 
                                                 category: location.state.category, offset: 0, type: "" , bodyFit: "", 
                                                 productName: location.state.searchVal , priceMin: "", priceMax: "", size: ""})
-  const { fetchedData, loading } = useFetch(process.env.REACT_APP_URL + "/api/products", properties) //Performs api calls
+  const { fetchedData, loading } = useFetch("/products", properties) //Performs api calls
   const [currentPage, setCurrentPage] = useState(1)
 
 

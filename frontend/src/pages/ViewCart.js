@@ -84,7 +84,7 @@ export default function ViewCart() {
     else if (bagItems !== null){
       document.getElementById("confirmation").classList.add("show")
       try{
-        await axios.post(process.env.REACT_APP_URL + "/api/products/addOrder", 
+        await axios.post("/products/addOrder", 
                          {userId: user._id, order: JSON.stringify(bagItems), itemCount: bagCount, 
                           totalPrice: (price + (0.07 * price)).toFixed(2) }) 
       }catch(err){

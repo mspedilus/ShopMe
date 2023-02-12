@@ -15,7 +15,7 @@ export default function Profile() {
   const fullName = user.firstName + " " + user.lastName
   const [profileData, setProfileData] = useState({...user, fullName: fullName})
   const [userInfo, setUserInfo] = useState({...user, fullName: fullName})
-  const {fetchedData, loading} = useFetch(process.env.REACT_APP_URL + "/api/products/getOrders") //Api call to get order history
+  const {fetchedData, loading} = useFetch("/products/getOrders") //Api call to get order history
   const [error, setError] = useState("")
   const [showEdit, setShowEdit] = useState(false)
 
@@ -96,7 +96,7 @@ export default function Profile() {
       try{
         const name = profileData.fullName.split(" ")
         const newArr = {...profileData, firstName: name[0], lastName: name.slice(1).join(" ")}
-        const res = await axios.put(process.env.REACT_APP_URL + "/api/users/" + user._id, newArr) 
+        const res = await axios.put("/users/" + user._id, newArr) 
         const fullName = name.join(" ")
         localStorage.setItem("user", JSON.stringify({...res.data, fullName: fullName}))
         setProfileData({...profileData, fullName: fullName})
