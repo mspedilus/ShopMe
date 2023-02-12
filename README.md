@@ -4,8 +4,7 @@ ShopMe is a MERN stack eCommerce website built using React, MongoDB, Express ser
 
 Demo: https://shopme-frontend.onrender.com/
 
-![](https://i.imgur.com/WQDqCwK.gif)
-
+![](https://i.imgur.com/d59B5Ck.gif)
 
 
 ## To Run Shop Me
