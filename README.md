@@ -4,6 +4,10 @@ ShopMe is a MERN stack eCommerce website built using React, MongoDB, Express ser
 
 Demo: https://shopme-frontend.onrender.com/
 
+![](https://i.imgur.com/WQDqCwK.gif)
+
+
+
 ## To Run Shop Me
 
 1) Copy the files and change the .env file in the backend folder to your configurations. The ASOS variable is the API key for the ASOS API and can be retrieved by going to https://rapidapi.com/apidojo/api/asos2. The MONGO variable is the URI for your Mongodb cluster and can be retrieved by creating a cluster on https://www.mongodb.com.
