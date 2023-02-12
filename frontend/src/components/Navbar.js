@@ -10,21 +10,19 @@ export default function Navbar() {
 
     let params = (new URL(document.location)).searchParams; //recieves url
     let searchUrl = params.get('name'); //stores movieTitle value from url
-    const [searchVal, setSearchVal] = useState(searchUrl)
+    const [searchVal, setSearchVal] = useState(searchUrl || "")
     const navigate = useNavigate()
     const { user, dispatch } = useContext(AuthContext)
 
     //Redirects page to search results page
     function onSearch(event, categoryId) {
-        if (event.key === "Enter" || event.type === "click") {
+        if (categoryId !== undefined && (event.key === "Enter" || event.type === "click")){
+            navigate("/search?name="+searchVal, {state: {searchVal: "", category: categoryId}});
+        }
+        else if (event.key === "Enter" || event.type === "click") {
             navigate("/search?name="+searchVal, {state: {searchVal, category: categoryId}});
         }
     }
-
-    //For logged in users, capitalizes the name shown in navbar
-    function capitalizeFirstLetter(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-      }
 
     //Logs the user out
     function handleLogout(){
@@ -38,7 +36,11 @@ export default function Navbar() {
         if (user == null) navigate("/login")
     }
 
-
+    //For logged in users, capitalizes the name shown in navbar
+    function capitalizeFirstLetter(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+   
     return (
     <div className="header">
             <div className="container">
@@ -65,7 +67,7 @@ export default function Navbar() {
 
                 {/* Search Navigation */}
                 <div className='search'>
-                    <input onKeyDown={onSearch} value={searchVal || ""} className="input" id="searchInput" type="text" onChange={(e) => setSearchVal(e.target.value)} />
+                    <input onKeyDown={onSearch} value={searchVal} className="input" id="searchInput" type="text" onChange={(e) => setSearchVal(e.target.value)} />
                     <FontAwesomeIcon onClick={onSearch} icon={faMagnifyingGlass} inverse id='magnifying'/>
                 </div>
             </div>

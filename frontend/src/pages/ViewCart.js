@@ -63,12 +63,14 @@ export default function ViewCart() {
   //Calculates price and item count in bag
   useEffect(() => {
     if (bagItems !== null){
+
       var count = 0
       var p = 0
       for(let x = 0; x < bagItems.length; x++){
-        p += bagItems[x].currPrice 
+        p += bagItems[x].currPrice  * bagItems[x].quantity
         count += bagItems[x].quantity
       }
+
       setPrice(p)
       setBagCount(count)
     }
@@ -76,10 +78,13 @@ export default function ViewCart() {
 
   //Adds item to mongodb & navigates to purchase history page
   async function handleCheckout() {
-    if (bagItems !== null){
+    if(!user){
+      navigate("/login")
+    }
+    else if (bagItems !== null){
       document.getElementById("confirmation").classList.add("show")
       try{
-        await axios.post(process.env.REACT_APP_URL + "/products/addOrder", 
+        await axios.post(process.env.REACT_APP_URL + "/api/products/addOrder", 
                          {userId: user._id, order: JSON.stringify(bagItems), itemCount: bagCount, 
                           totalPrice: (price + (0.07 * price)).toFixed(2) }) 
       }catch(err){

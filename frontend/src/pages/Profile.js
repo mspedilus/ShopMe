@@ -14,7 +14,8 @@ export default function Profile() {
   const user = JSON.parse(localStorage.getItem("user"))
   const fullName = user.firstName + " " + user.lastName
   const [profileData, setProfileData] = useState({...user, fullName: fullName})
-  const {fetchedData, loading} = useFetch(process.env.REACT_APP_URL  + "/products/getOrders") //Api call to get order history
+  const [userInfo, setUserInfo] = useState({...user, fullName: fullName})
+  const {fetchedData, loading} = useFetch(process.env.REACT_APP_URL + "/api/products/getOrders") //Api call to get order history
   const [error, setError] = useState("")
   const [showEdit, setShowEdit] = useState(false)
 
@@ -31,7 +32,7 @@ export default function Profile() {
         <div className='purchases-dropBtn' onClick={() => showDropdown(i)}>
           <div>
             <p>{order.createdAt.slice(5, 7) + "/" + order.createdAt.slice(8, 10)  + "/" + order.createdAt.slice(0, 4)}</p>
-            <p>Order #{order._id.replace(/\D/g,'')}</p>
+            <p>Order #{order._id.replace(/\D/g,'').slice(0,10)}</p>
           </div>
           <div>
             <p>Total: ${order.totalPrice}</p>
@@ -95,10 +96,11 @@ export default function Profile() {
       try{
         const name = profileData.fullName.split(" ")
         const newArr = {...profileData, firstName: name[0], lastName: name.slice(1).join(" ")}
-        const res = await axios.put(process.env.REACT_APP_URL + "/users/" + user._id, newArr) 
-        const fullName = res.data.firstName + " " + res.data.lastName
+        const res = await axios.put(process.env.REACT_APP_URL + "/api/users/" + user._id, newArr) 
+        const fullName = name.join(" ")
         localStorage.setItem("user", JSON.stringify({...res.data, fullName: fullName}))
-        setProfileData(res.data)
+        setProfileData({...profileData, fullName: fullName})
+        setUserInfo({...profileData, fullName: fullName})
         document.location.reload();
       } catch(err){
         alert("An error has occured. Please try again later.")
@@ -107,7 +109,6 @@ export default function Profile() {
 
     }
   } 
-
 
   return (
 
@@ -134,15 +135,15 @@ export default function Profile() {
             <input type="text" name="phoneNum" value={profileData.phoneNum} onChange={(e) => handleChange(e)} required/>
           </div>
           <button onClick={handleSave}>Save</button>
-          <button onClick={() => setShowEdit(false)}>Cancel</button>
+          <button onClick={() => {setShowEdit(false); setProfileData(userInfo)}}>Cancel</button>
           <p className='error'>{error}</p>
         </div>
         :
         <div className='profile' >
           <h1>Profile</h1>
-          <p>Name: {profileData.firstName} {profileData.lastName}</p>
-          <p>Email: {profileData.email}</p>
-          <p>Phone Number: {profileData.phoneNum}</p>
+          <p>Name: {userInfo.fullName}</p>
+          <p>Email: {userInfo.email}</p>
+          <p>Phone Number: {userInfo.phoneNum}</p>
           <button onClick={() => setShowEdit(true)}>Edit</button>
         </div>
         }
@@ -153,7 +154,6 @@ export default function Profile() {
           <div className='order-dropdown'>
             {fetchedData !== ""  && fetchedData.map(displayOrders) }
             {fetchedData.length === 0 && <p id="noOrdersMsg">No orders has been found</p>}
-
           </div>
         </div>
       </div>

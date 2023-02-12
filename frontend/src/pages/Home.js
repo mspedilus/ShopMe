@@ -110,7 +110,7 @@ export default function Home() {
             <div className="text">Shop the best deals on shoes</div>
           </div>
         </div>
-        <FontAwesomeIcon icon={faAngleRight} className='icon arrow 'onClick={() => plusSlides(1, 1)} size="2xl"/>
+        <FontAwesomeIcon icon={faAngleRight} className='icon arrow' onClick={() => plusSlides(1, 1)} size="2xl"/>
       </div>
 
     <div className='dotContainer'>

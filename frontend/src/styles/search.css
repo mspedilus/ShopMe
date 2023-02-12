@@ -1,6 +1,10 @@
+.searchItem{
+    min-height: 100vh;
+}
 .search-container{
     display: flex;
     min-height: 100vh;
+    height: 100%;
     flex-direction: row;
     margin-bottom: 30px;
 }
@@ -160,11 +164,13 @@ input[type=number] {
 
 .loading{
     position: fixed;
-    display: flex;
+    display: block;
     left: 50vw;
-    height: 100vh;
+    min-height: 100vh;
     width: 50px;
     margin-top: 50px;
+    height: 100%;
+
 }
 
 .page-container{

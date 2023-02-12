@@ -15,7 +15,7 @@ export default function ItemDetails() {
   const navigate = useNavigate()
   const location = useLocation();
   const [properties] = useState({id: location.state.id})
-  const { fetchedData, loading } = useFetch(process.env.REACT_APP_URL + "/products/details", properties) //Performs api calls to get product information
+  const { fetchedData, loading } = useFetch(process.env.REACT_APP_URL + "/api/products/details", properties) //Performs api calls to get product information
   const [size, setSize] = useState("")
   const bag = JSON.parse(localStorage.getItem("bag")) || []
   const [bagItems, setBagItems] = useState(bag)

@@ -12,9 +12,6 @@ export default function Sidebar() {
     setSearchResults(fetchedData)
   }
 
-  console.log("sidebar", fetchedData)
-  console.log("searchResults", searchResults)
-
   // Toggles between hiding and showing the dropdown content 
   function showDropdown(x) {
       document.getElementById(x).classList.toggle("show");
