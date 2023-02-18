@@ -14,3 +14,4 @@ Demo: https://shopme-frontend.onrender.com/
 2) Run npm install in both the frontend and backend folder to download all necessary packages
 3) Run npm start in both the frontend and backend folder to run the project and server.
 
+ 
